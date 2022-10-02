@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">FoodchallengePlace</string>
+    <string name="app_name">Foodchallenge Place</string>
+    <string name="button_addFoodchallengeplace">Add Food Challenge</string>
+    <string name="hint_foodchallengeplaceTitle">Food Challenge Title</string>
 </resources>

@@ -1,4 +1,4 @@
-package ie.wit.foodchallengeplace
+package org.wit.foodchallengeplace
 
 import org.junit.Test
 
