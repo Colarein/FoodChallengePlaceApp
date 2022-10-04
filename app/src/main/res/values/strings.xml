@@ -5,4 +5,5 @@
     <string name="hint_foodchallengeplaceRestaurant">Restaurant </string>
     <string name="hint_foodchallengeplaceAddress">Address </string>
     <string name="hint_foodchallengeplaceDifficulty">Difficulty </string>
+    <string name="menu_addFoodchallengeplace">Add</string>
 </resources>

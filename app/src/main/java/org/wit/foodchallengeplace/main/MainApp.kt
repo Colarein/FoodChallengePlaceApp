@@ -12,8 +12,8 @@ class MainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         i("Food Challenge Place started")
-        foodchallengeplaces.add(FoodchallengePlaceModel(1, "The Big Boi Burger", "O'Dwyer's","Cork","5"))
-        foodchallengeplaces.add(FoodchallengePlaceModel(2, "Mount Fuji Ramen Bowl", "Miyazaki's", "Cork","1"))
-        foodchallengeplaces.add(FoodchallengePlaceModel(3, "The Godfather", "Tony's Bistro","Cork","3"))
+//        foodchallengeplaces.add(FoodchallengePlaceModel(1, "The Big Boi Burger", "O'Dwyer's","Cork","5"))
+//        foodchallengeplaces.add(FoodchallengePlaceModel(2, "Mount Fuji Ramen Bowl", "Miyazaki's", "Cork","1"))
+//        foodchallengeplaces.add(FoodchallengePlaceModel(3, "The Godfather", "Tony's Bistro","Cork","3"))
     }
 }

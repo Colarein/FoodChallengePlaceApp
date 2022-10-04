@@ -30,8 +30,11 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
             if (foodchallengeplace.title.isNotEmpty()) {
                 app.foodchallengeplaces.add(foodchallengeplace.copy())
                 i("add Button Pressed: $foodchallengeplace")
-                for (i in app.foodchallengeplaces.indices)
-                { i("Food Challenge[$i]:${this.app.foodchallengeplaces[i]}") }
+                for (i in app.foodchallengeplaces.indices) {
+                    i("Food Challenge[$i]:${this.app.foodchallengeplaces[i]}")
+                }
+                setResult(RESULT_OK)
+                finish()
             }
             else {
                 Snackbar
