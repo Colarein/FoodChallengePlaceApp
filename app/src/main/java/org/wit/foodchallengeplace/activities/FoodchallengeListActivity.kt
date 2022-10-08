@@ -8,10 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.adapters.FoodchallengePlaceAdapter
+import org.wit.foodchallengeplace.adapters.FoodchallengePlaceListener
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengeListBinding
 import org.wit.foodchallengeplace.main.MainApp
+import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 
-class FoodchallengeListActivity : AppCompatActivity() {
+class FoodchallengeListActivity : AppCompatActivity(), FoodchallengePlaceListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityFoodchallengeListBinding
 
@@ -26,7 +28,7 @@ class FoodchallengeListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = FoodchallengePlaceAdapter(app.foodchallengeplaces.findAll())
+        binding.recyclerView.adapter = FoodchallengePlaceAdapter(app.foodchallengeplaces.findAll(), this)
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -41,5 +43,10 @@ class FoodchallengeListActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onFoodchallengeplaceClick(foodchallengeplace: FoodchallengePlaceModel) {
+        val launcherIntent = Intent(this, FoodchallengePlaceListener::class.java)
+        startActivityForResult(launcherIntent,0)
     }
 }

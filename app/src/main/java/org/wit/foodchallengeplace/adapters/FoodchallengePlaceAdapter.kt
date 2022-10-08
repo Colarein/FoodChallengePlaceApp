@@ -6,7 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import org.wit.foodchallengeplace.databinding.CardFoodchallengeplaceBinding
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 
-class FoodchallengePlaceAdapter constructor(private var foodchallengeplaces: List<FoodchallengePlaceModel>) :
+interface FoodchallengePlaceListener {
+    fun onFoodchallengeplaceClick(foodchallengeplace: FoodchallengePlaceModel)
+}
+
+class FoodchallengePlaceAdapter constructor(private var foodchallengeplaces: List<FoodchallengePlaceModel>,
+                                            private val listener: FoodchallengePlaceListener):
     RecyclerView.Adapter<FoodchallengePlaceAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -17,7 +22,7 @@ class FoodchallengePlaceAdapter constructor(private var foodchallengeplaces: Lis
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val foodchallengeplace = foodchallengeplaces[holder.adapterPosition]
-        holder.bind(foodchallengeplace)
+        holder.bind(foodchallengeplace, listener)
     }
 
     override fun getItemCount(): Int = foodchallengeplaces.size
@@ -25,11 +30,12 @@ class FoodchallengePlaceAdapter constructor(private var foodchallengeplaces: Lis
     class MainHolder(private val binding : CardFoodchallengeplaceBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(foodchallengeplace: FoodchallengePlaceModel) {
+        fun bind(foodchallengeplace: FoodchallengePlaceModel, listener:FoodchallengePlaceListener) {
             binding.foodchallengeplaceTitle.text = foodchallengeplace.title
             binding.restaurant.text = foodchallengeplace.restaurant
             binding.address.text = foodchallengeplace.address
             binding.difficulty.text = foodchallengeplace.difficulty
+            binding.root.setOnClickListener { listener.onFoodchallengeplaceClick(foodchallengeplace) }
         }
     }
 }
