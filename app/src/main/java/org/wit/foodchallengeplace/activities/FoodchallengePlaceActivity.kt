@@ -1,12 +1,14 @@
 package org.wit.foodchallengeplace.activities
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
+import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengesplaceBinding
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
-import timber.log.Timber
 import timber.log.Timber.i
 
 class FoodchallengePlaceActivity : AppCompatActivity() {
@@ -19,20 +21,20 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFoodchallengesplaceBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.foodchallengetoolbarAdd.title = title
+        setSupportActionBar(binding.foodchallengetoolbarAdd)
         app = application as MainApp
         i("Foodchallenge Place Activity started...")
+
         binding.btnAdd.setOnClickListener() {
             foodchallengeplace.title = binding.foodchallengeplaceTitle.text.toString()
             foodchallengeplace.restaurant = binding.restaurant.text.toString()
             foodchallengeplace.address = binding.address.text.toString()
             foodchallengeplace.difficulty = binding.difficulty.text.toString()
             if (foodchallengeplace.title.isNotEmpty()) {
-                app.foodchallengeplaces.add(foodchallengeplace.copy())
+
+                app.foodchallengeplaces.create(foodchallengeplace.copy())
                 i("add Button Pressed: $foodchallengeplace")
-                for (i in app.foodchallengeplaces.indices) {
-                    i("Food Challenge[$i]:${this.app.foodchallengeplaces[i]}")
-                }
                 setResult(RESULT_OK)
                 finish()
             }
@@ -42,5 +44,18 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
                     .show()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    menuInflater.inflate(R.menu.menu_foodchallengeplace, menu)
+    return super.onCreateOptionsMenu(menu)
+}
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+        R.id.item_cancel -> { finish()
+        }
+    }
+    return super.onOptionsItemSelected(item)
     }
 }
