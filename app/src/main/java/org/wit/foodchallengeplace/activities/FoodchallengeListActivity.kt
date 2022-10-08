@@ -47,6 +47,7 @@ class FoodchallengeListActivity : AppCompatActivity(), FoodchallengePlaceListene
 
     override fun onFoodchallengeplaceClick(foodchallengeplace: FoodchallengePlaceModel) {
         val launcherIntent = Intent(this, FoodchallengePlaceListener::class.java)
+        launcherIntent.putExtra("foodchallengeplace_edit", foodchallengeplace)
         startActivityForResult(launcherIntent,0)
     }
 }

@@ -25,7 +25,13 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
         setSupportActionBar(binding.foodchallengetoolbarAdd)
         app = application as MainApp
         i("Foodchallenge Place Activity started...")
-
+        if (intent.hasExtra("foodchallengeplace_edit")) {
+            foodchallengeplace = intent.extras?.getParcelable("foodchallengeplace_edit")!!
+            binding.foodchallengeplaceTitle.setText(foodchallengeplace.title)
+            binding.restaurant.setText(foodchallengeplace.restaurant)
+            binding.address.setText(foodchallengeplace.address)
+            binding.difficulty.setText(foodchallengeplace.difficulty)
+        }
         binding.btnAdd.setOnClickListener() {
             foodchallengeplace.title = binding.foodchallengeplaceTitle.text.toString()
             foodchallengeplace.restaurant = binding.restaurant.text.toString()
