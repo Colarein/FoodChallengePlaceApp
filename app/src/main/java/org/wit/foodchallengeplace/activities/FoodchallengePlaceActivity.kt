@@ -19,6 +19,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var edit = false
         binding = ActivityFoodchallengesplaceBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.foodchallengetoolbarAdd.title = title
@@ -26,29 +27,33 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
         app = application as MainApp
         i("Foodchallenge Place Activity started...")
         if (intent.hasExtra("foodchallengeplace_edit")) {
+            edit = true
             foodchallengeplace = intent.extras?.getParcelable("foodchallengeplace_edit")!!
             binding.foodchallengeplaceTitle.setText(foodchallengeplace.title)
             binding.restaurant.setText(foodchallengeplace.restaurant)
             binding.address.setText(foodchallengeplace.address)
             binding.difficulty.setText(foodchallengeplace.difficulty)
+            binding.btnAdd.setText(R.string.save_foodchallengeplace)
         }
         binding.btnAdd.setOnClickListener() {
             foodchallengeplace.title = binding.foodchallengeplaceTitle.text.toString()
             foodchallengeplace.restaurant = binding.restaurant.text.toString()
             foodchallengeplace.address = binding.address.text.toString()
             foodchallengeplace.difficulty = binding.difficulty.text.toString()
-            if (foodchallengeplace.title.isNotEmpty()) {
-
-                app.foodchallengeplaces.create(foodchallengeplace.copy())
-                i("add Button Pressed: $foodchallengeplace")
-                setResult(RESULT_OK)
-                finish()
-            }
-            else {
+            if (foodchallengeplace.title.isEmpty()) {
                 Snackbar
-                    .make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
+                    .make(it, R.string.enter_foodchallengeplace_title, Snackbar.LENGTH_LONG)
                     .show()
+            } else {
+                if (edit) {
+                    app.foodchallengeplaces.update(foodchallengeplace.copy())
+                } else {
+                    app.foodchallengeplaces.create(foodchallengeplace.copy())
+                }
+
             }
+            setResult(RESULT_OK)
+            finish()
         }
     }
 

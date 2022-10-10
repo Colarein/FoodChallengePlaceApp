@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="org.wit.foodchallengeplace">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:name="org.wit.foodchallengeplace.main.MainApp"
@@ -23,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.FoodchallengePlaceActivity"
+            android:name="org.wit.foodchallengeplace.activities.FoodchallengePlaceActivity"
             android:exported="true">
         </activity>
     </application>
