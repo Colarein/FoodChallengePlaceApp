@@ -1,5 +1,6 @@
 package org.wit.foodchallengeplace.models
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -9,4 +10,5 @@ data class FoodchallengePlaceModel(
     var title: String = "",
     var restaurant: String = "",
     var address: String = "",
-    var difficulty: String = "") : Parcelable
+    var difficulty: String = "",
+    var image: Uri = Uri.EMPTY) : Parcelable

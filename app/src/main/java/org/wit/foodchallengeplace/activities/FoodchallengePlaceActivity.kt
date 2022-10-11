@@ -1,14 +1,19 @@
 package org.wit.foodchallengeplace.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengesplaceBinding
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
+import org.wit.foodchallengeplace.helpers.showImagePicker
 import timber.log.Timber.i
 
 class FoodchallengePlaceActivity : AppCompatActivity() {
@@ -16,6 +21,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFoodchallengesplaceBinding
     var foodchallengeplace = FoodchallengePlaceModel()
     lateinit var app : MainApp
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +40,10 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
             binding.address.setText(foodchallengeplace.address)
             binding.difficulty.setText(foodchallengeplace.difficulty)
             binding.btnAdd.setText(R.string.save_foodchallengeplace)
+            binding.chooseImage.setText(R.string.change_foodchallengeplace_image)
+            Picasso.get()
+                .load(foodchallengeplace.image)
+                .into(binding.foodchallengeplaceImage)
         }
         binding.btnAdd.setOnClickListener() {
             foodchallengeplace.title = binding.foodchallengeplaceTitle.text.toString()
@@ -50,11 +60,17 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
                 } else {
                     app.foodchallengeplaces.create(foodchallengeplace.copy())
                 }
-
             }
             setResult(RESULT_OK)
             finish()
         }
+
+        binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
+            i("Select image")
+        }
+
+        registerImagePickerCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -68,5 +84,24 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
         }
     }
     return super.onOptionsItemSelected(item)
+    }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            foodchallengeplace.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(foodchallengeplace.image)
+                                .into(binding.foodchallengeplaceImage)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 }

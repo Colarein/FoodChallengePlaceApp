@@ -9,4 +9,7 @@
     <string name="menu_cancelFoodchallengeplace">Cancel</string>
     <string name="enter_foodchallengeplace_title"> Please enter the Food Challenge Title </string>
     <string name="save_foodchallengeplace"> Save Food Challenge </string>
+    <string name="button_addImage"> Add Image </string>
+    <string name="select_foodchallengeplace_image">Select Food Challenge Image</string>
+    <string name="change_foodchallengeplace_image"> Change Food Challenge Image</string>
 </resources>
