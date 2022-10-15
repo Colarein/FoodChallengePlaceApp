@@ -3,6 +3,7 @@ package org.wit.foodchallengeplace.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.foodchallengeplace.databinding.CardFoodchallengeplaceBinding
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 
@@ -35,6 +36,7 @@ class FoodchallengePlaceAdapter constructor(private var foodchallengeplaces: Lis
             binding.restaurant.text = foodchallengeplace.restaurant
             binding.address.text = foodchallengeplace.address
             binding.difficulty.text = foodchallengeplace.difficulty
+            Picasso.get().load(foodchallengeplace.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onFoodchallengeplaceClick(foodchallengeplace) }
         }
     }
