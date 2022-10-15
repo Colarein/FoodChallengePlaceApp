@@ -38,6 +38,10 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
 
         i("Foodchallenge Place Activity started...")
 
+        binding.foodchallengeplaceLocation.setOnClickListener {
+            i ("Set Location Pressed")
+        }
+
         if (intent.hasExtra("foodchallengeplace_edit")) {
             edit = true
             foodchallengeplace = intent.extras?.getParcelable("foodchallengeplace_edit")!!
