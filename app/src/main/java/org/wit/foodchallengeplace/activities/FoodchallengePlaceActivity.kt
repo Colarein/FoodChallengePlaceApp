@@ -15,6 +15,7 @@ import org.wit.foodchallengeplace.databinding.ActivityFoodchallengesplaceBinding
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import org.wit.foodchallengeplace.helpers.showImagePicker
+import org.wit.foodchallengeplace.models.Location
 import timber.log.Timber.i
 
 class FoodchallengePlaceActivity : AppCompatActivity() {
@@ -23,6 +24,8 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
     var foodchallengeplace = FoodchallengePlaceModel()
     lateinit var app : MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+    var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,11 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
 
         binding.foodchallengeplaceLocation.setOnClickListener {
             i ("Set Location Pressed")
+        }
+        binding.foodchallengeplaceLocation.setOnClickListener {
+            val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
         }
 
         if (intent.hasExtra("foodchallengeplace_edit")) {
@@ -83,6 +91,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
         }
 
         registerImagePickerCallback()
+        registerMapCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -111,6 +120,23 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
                                 .load(foodchallengeplace.image)
                                 .into(binding.foodchallengeplaceImage)
                             binding.chooseImage.setText(R.string.change_foodchallengeplace_image)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            location = result.data!!.extras?.getParcelable("location")!!
+                            i("Location == $location")
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
