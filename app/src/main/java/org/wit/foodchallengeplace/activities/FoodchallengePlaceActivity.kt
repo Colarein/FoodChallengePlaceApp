@@ -1,6 +1,7 @@
 package org.wit.foodchallengeplace.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -25,13 +26,18 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         var edit = false
+
         binding = ActivityFoodchallengesplaceBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.foodchallengetoolbarAdd.title = title
         setSupportActionBar(binding.foodchallengetoolbarAdd)
+
         app = application as MainApp
+
         i("Foodchallenge Place Activity started...")
+
         if (intent.hasExtra("foodchallengeplace_edit")) {
             edit = true
             foodchallengeplace = intent.extras?.getParcelable("foodchallengeplace_edit")!!
@@ -40,10 +46,12 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
             binding.address.setText(foodchallengeplace.address)
             binding.difficulty.setText(foodchallengeplace.difficulty)
             binding.btnAdd.setText(R.string.save_foodchallengeplace)
-            binding.chooseImage.setText(R.string.change_foodchallengeplace_image)
             Picasso.get()
                 .load(foodchallengeplace.image)
                 .into(binding.foodchallengeplaceImage)
+            if (foodchallengeplace.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_foodchallengeplace_image)
+            }
         }
         binding.btnAdd.setOnClickListener() {
             foodchallengeplace.title = binding.foodchallengeplaceTitle.text.toString()
@@ -98,6 +106,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
                             Picasso.get()
                                 .load(foodchallengeplace.image)
                                 .into(binding.foodchallengeplaceImage)
+                            binding.chooseImage.setText(R.string.change_foodchallengeplace_image)
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
