@@ -30,6 +30,9 @@ class FoodchallengePlaceMemStore : FoodchallengePlaceStore {
             foundFoodchallengeplace.address = foodchallengeplace.address
             foundFoodchallengeplace.difficulty = foodchallengeplace.difficulty
             foundFoodchallengeplace.image = foodchallengeplace.image
+            foundFoodchallengeplace.lat = foodchallengeplace.lat
+            foundFoodchallengeplace.lng = foodchallengeplace.lng
+            foundFoodchallengeplace.zoom = foodchallengeplace.zoom
             logAll()
         }
     }

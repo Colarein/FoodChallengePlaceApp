@@ -1,6 +1,7 @@
 package org.wit.foodchallengeplace.activities
 
 import android.content.Intent
+//import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -9,14 +10,17 @@ import android.widget.NumberPicker
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.MemoryPolicy
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengesplaceBinding
 import org.wit.foodchallengeplace.helpers.showImagePicker
 import org.wit.foodchallengeplace.main.MainApp
-import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import org.wit.foodchallengeplace.models.Location
+import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import timber.log.Timber.i
 
 
@@ -27,7 +31,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
     lateinit var app : MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-    var location = Location(52.245696, -7.139102, 15f)
+//    var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,14 +50,6 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
 
         i("Foodchallenge Place Activity started...")
 
-        binding.foodchallengeplaceLocation.setOnClickListener {
-            i ("Set Location Pressed")
-        }
-        binding.foodchallengeplaceLocation.setOnClickListener {
-            val launcherIntent = Intent(this, MapActivity::class.java)
-                .putExtra("location", location)
-            mapIntentLauncher.launch(launcherIntent)
-        }
 
         if (intent.hasExtra("foodchallengeplace_edit")) {
             edit = true
@@ -96,6 +92,22 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
             i("Select image")
         }
 
+        binding.foodchallengeplaceLocation.setOnClickListener {
+            i ("Set Location Pressed")
+        }
+
+        binding.foodchallengeplaceLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (foodchallengeplace.zoom != 0f) {
+                location.lat =  foodchallengeplace.lat
+                location.lng = foodchallengeplace.lng
+                location.zoom = foodchallengeplace.zoom
+            }
+            val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
         registerImagePickerCallback()
         registerMapCallback()
     }
@@ -107,7 +119,8 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
     when (item.itemId) {
-        R.id.item_cancel -> { finish()
+        R.id.item_cancel -> {
+            finish()
         }
     }
     return super.onOptionsItemSelected(item)
@@ -141,8 +154,11 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            location = result.data!!.extras?.getParcelable("location")!!
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
+                            foodchallengeplace.lat = location.lat
+                            foodchallengeplace.lng = location.lng
+                            foodchallengeplace.zoom = location.zoom
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
