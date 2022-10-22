@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.NumberPicker
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +13,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengesplaceBinding
+import org.wit.foodchallengeplace.helpers.showImagePicker
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
-import org.wit.foodchallengeplace.helpers.showImagePicker
 import org.wit.foodchallengeplace.models.Location
 import timber.log.Timber.i
+
 
 class FoodchallengePlaceActivity : AppCompatActivity() {
 
@@ -36,6 +38,9 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.foodchallengetoolbarAdd.title = title
         setSupportActionBar(binding.foodchallengetoolbarAdd)
+
+//        binding.difficultyPicker.maxValue = 5;
+//        binding.difficultyPicker.minValue = 1;
 
         app = application as MainApp
 
@@ -70,6 +75,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
             foodchallengeplace.restaurant = binding.restaurant.text.toString()
             foodchallengeplace.address = binding.address.text.toString()
             foodchallengeplace.difficulty = binding.difficulty.text.toString()
+//            foodchallengeplace.difficulty = binding.difficulty.text.toString().toInt()
             if (foodchallengeplace.title.isEmpty()) {
                 Snackbar
                     .make(it, R.string.enter_foodchallengeplace_title, Snackbar.LENGTH_LONG)
