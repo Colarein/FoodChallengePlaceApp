@@ -32,6 +32,7 @@ class FoodchallengeListActivity : AppCompatActivity(), FoodchallengePlaceListene
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = FoodchallengePlaceAdapter(app.foodchallengeplaces.findAll(), this)
+        loadFoodchallengeplaces()
 
         registerRefreshCallback()
     }
@@ -59,6 +60,15 @@ class FoodchallengeListActivity : AppCompatActivity(), FoodchallengePlaceListene
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { binding.recyclerView.adapter?.notifyDataSetChanged() }
+            { loadFoodchallengeplaces() }
+    }
+
+    private fun loadFoodchallengeplaces() {
+        showFoodchallengeplaces(app.foodchallengeplaces.findAll())
+    }
+
+    fun showFoodchallengeplaces (foodchallengeplaces: List<FoodchallengePlaceModel>) {
+        binding.recyclerView.adapter = FoodchallengePlaceAdapter(foodchallengeplaces, this)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }

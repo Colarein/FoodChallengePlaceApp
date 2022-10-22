@@ -118,12 +118,16 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
 }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-        R.id.item_cancel -> {
-            finish()
+        when (item.itemId) {
+            R.id.item_delete -> {
+                app.foodchallengeplaces.delete(foodchallengeplace)
+                finish()
+            }
+            R.id.item_cancel -> {
+                finish()
+            }
         }
-    }
-    return super.onOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item)
     }
 
     private fun registerImagePickerCallback() {

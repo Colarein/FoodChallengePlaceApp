@@ -2,15 +2,19 @@ package org.wit.foodchallengeplace.main
 
 import android.app.Application
 import org.wit.foodchallengeplace.models.FoodchallengePlaceMemStore
+import org.wit.foodchallengeplace.models.FoodchallengePlaceStore
+import org.wit.foodchallengeplace.models.FoodchallengePlaceJSONStore
 import timber.log.Timber
 import timber.log.Timber.i
 
 class MainApp : Application() {
-    val foodchallengeplaces = FoodchallengePlaceMemStore()
+
+    lateinit var foodchallengeplaces: FoodchallengePlaceStore
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        i("Food Challenge Place started")
+        foodchallengeplaces = FoodchallengePlaceJSONStore(applicationContext)
+        i("Foodchallenge Place started")
     }
 }

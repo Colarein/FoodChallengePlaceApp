@@ -37,6 +37,11 @@ class FoodchallengePlaceMemStore : FoodchallengePlaceStore {
         }
     }
 
+
+    override fun delete(foodchallengeplace: FoodchallengePlaceModel) {
+        foodchallengeplaces.remove(foodchallengeplace)
+    }
+
     fun logAll() {
         foodchallengeplaces.forEach{ i("${it}") }
     }

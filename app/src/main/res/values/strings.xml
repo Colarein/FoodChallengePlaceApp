@@ -14,4 +14,5 @@
     <string name="change_foodchallengeplace_image"> Change Food Challenge Image</string>
     <string name="button_location">Save Food Challenge Location</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="menu_deleteFoodchallengeplace">Delete</string>
 </resources>

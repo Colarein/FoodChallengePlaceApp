@@ -4,4 +4,5 @@ interface FoodchallengePlaceStore {
     fun findAll(): List<FoodchallengePlaceModel>
     fun create(foodchallengeplace: FoodchallengePlaceModel)
     fun update (foodchallengeplace: FoodchallengePlaceModel)
+    fun delete (foodchallengeplace: FoodchallengePlaceModel)
 }
