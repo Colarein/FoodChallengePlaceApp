@@ -19,6 +19,7 @@ class FoodchallengeListActivity : AppCompatActivity(), FoodchallengePlaceListene
     lateinit var app: MainApp
     private lateinit var binding: ActivityFoodchallengeListBinding
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapsIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,7 @@ class FoodchallengeListActivity : AppCompatActivity(), FoodchallengePlaceListene
         loadFoodchallengeplaces()
 
         registerRefreshCallback()
+        registerMapCallback()
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -47,6 +49,10 @@ class FoodchallengeListActivity : AppCompatActivity(), FoodchallengePlaceListene
                 val launcherIntent = Intent(this, FoodchallengePlaceActivity::class.java)
                 refreshIntentLauncher.launch(launcherIntent)
             }
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, FoodchallengePlaceMapsActivity::class.java)
+                mapsIntentLauncher.launch(launcherIntent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -55,6 +61,11 @@ class FoodchallengeListActivity : AppCompatActivity(), FoodchallengePlaceListene
         val launcherIntent = Intent(this, FoodchallengePlaceActivity::class.java)
         launcherIntent.putExtra("foodchallengeplace_edit", foodchallengeplace)
         refreshIntentLauncher.launch(launcherIntent)
+    }
+    private fun registerMapCallback() {
+        mapsIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { }
     }
 
     private fun registerRefreshCallback() {
