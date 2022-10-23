@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <application
         android:name="org.wit.foodchallengeplace.main.MainApp"
         android:allowBackup="true"
@@ -15,6 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodchallengePlace">
+        <activity
+            android:name="org.wit.foodchallengeplace.activities.FoodchallengePlaceMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_foodchallenge_place_maps"
+            android:theme="@style/Theme.FoodchallengePlace.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -35,7 +39,7 @@
         </activity>
         <activity
             android:name=".activities.FoodchallengePlaceActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
