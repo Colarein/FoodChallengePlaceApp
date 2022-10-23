@@ -15,7 +15,12 @@
     <string name="button_location">Save Food Challenge Location</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="menu_deleteFoodchallengeplace">Delete</string>
-    <string name="title_activity_foodchallenge_place_maps">FoodchallengePlaceMapsActivity</string>
+    <string name="title_activity_foodchallenge_place_maps">Map of All Foodchallenge Places</string>
+    <string name="foodchallengeplace_image_placeholder">Foodchallenge Place Image</string>
+    <string name="foodchallengeplace_title_placeholder">Foodchallenge Place Title</string>
+    <string name="foodchallengeplace_restaurant_placeholder">Restaurant</string>
+    <string name="foodchallengeplace_address_placeholder">Address</string>
+    <string name="foodchallengeplace_difficulty_placeholder">Difficulty</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

@@ -1,43 +1,76 @@
 package org.wit.foodchallengeplace.activities
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengeplaceMapsBinding
+import org.wit.foodchallengeplace.databinding.ContentFoodchallengePlaceMapsBinding
+import org.wit.foodchallengeplace.main.MainApp
 
-class FoodchallengePlaceMapsActivity : AppCompatActivity() {
+class FoodchallengePlaceMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityFoodchallengeplaceMapsBinding
+    private lateinit var contentBinding: ContentFoodchallengePlaceMapsBinding
+    lateinit var map: GoogleMap
+    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        app = application as MainApp
         binding = ActivityFoodchallengeplaceMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
-
-        val navController =
-            findNavController(R.id.nav_host_fragment_content_foodchallenge_place_maps)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        contentBinding = ContentFoodchallengePlaceMapsBinding.bind(binding.root)
+        contentBinding.mapView.onCreate(savedInstanceState)
+        contentBinding.mapView.getMapAsync {
+            map = it
+            configureMap()
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController =
-            findNavController(R.id.nav_host_fragment_content_foodchallenge_place_maps)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+    fun configureMap() {
+        map.setOnMarkerClickListener(this)
+        map.uiSettings.isZoomControlsEnabled = true
+        app.foodchallengeplaces.findAll().forEach {
+            val loc = LatLng(it.lat, it.lng)
+            val options = MarkerOptions().title(it.title).position(loc)
+            map.addMarker(options)?.tag = it.id
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
+        }
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        contentBinding.currentTitle.text = marker.title
+        return false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        contentBinding.mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        contentBinding.mapView.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        contentBinding.mapView.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        contentBinding.mapView.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        contentBinding.mapView.onSaveInstanceState(outState)
     }
 }

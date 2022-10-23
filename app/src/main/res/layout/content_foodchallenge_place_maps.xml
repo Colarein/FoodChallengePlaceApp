@@ -1,19 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activities.FoodchallengePlaceMapsActivity"
+    tools:showIn="@layout/activity_foodchallengeplace_maps">
 
-    <fragment
-        android:id="@+id/nav_host_fragment_content_foodchallenge_place_maps"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:defaultNavHost="true"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="380dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.733"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph" />
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintVertical_bias="1.0" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/currentImage"
+                android:layout_width="121dp"
+                android:layout_height="98dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                android:contentDescription="@string/foodchallengeplace_image_placeholder" />
+
+            <TextView
+                android:id="@+id/currentTitle"
+                android:layout_width="175dp"
+                android:layout_height="21dp"
+                android:layout_margin="16dp"
+                android:text="@string/foodchallengeplace_title_placeholder"
+                app:layout_constraintEnd_toStartOf="@+id/currentImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.10" />
+
+            <TextView
+                android:id="@+id/currentRestaurant"
+                android:layout_width="175dp"
+                android:layout_height="21dp"
+                android:layout_margin="16dp"
+                android:text="@string/foodchallengeplace_restaurant_placeholder"
+                app:layout_constraintBottom_toBottomOf="@+id/currentTitle"
+                app:layout_constraintBottom_toTopOf="@+id/currentAddress"
+                app:layout_constraintEnd_toStartOf="@+id/currentImage"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/currentAddress"
+                android:layout_width="175dp"
+                android:layout_height="21dp"
+                android:layout_margin="16dp"
+                android:text="@string/foodchallengeplace_address_placeholder"
+                app:layout_constraintBottom_toBottomOf="@+id/currentRestaurant"
+                app:layout_constraintBottom_toTopOf="@+id/currentDifficulty"
+                app:layout_constraintEnd_toStartOf="@+id/currentImage"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/currentDifficulty"
+                android:layout_width="175dp"
+                android:layout_height="21dp"
+                android:layout_margin="16dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/foodchallengeplace_difficulty_placeholder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/currentImage"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="372dp"
+        android:layout_height="435dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
