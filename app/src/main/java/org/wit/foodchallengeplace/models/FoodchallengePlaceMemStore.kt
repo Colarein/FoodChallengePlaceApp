@@ -42,6 +42,11 @@ class FoodchallengePlaceMemStore : FoodchallengePlaceStore {
         foodchallengeplaces.remove(foodchallengeplace)
     }
 
+    override fun findById(id:Long) : FoodchallengePlaceModel? {
+        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.id == id }
+        return foundFoodchallengeplace
+    }
+
     fun logAll() {
         foodchallengeplaces.forEach{ i("${it}") }
     }
