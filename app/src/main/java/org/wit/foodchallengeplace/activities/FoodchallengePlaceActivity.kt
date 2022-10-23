@@ -32,11 +32,10 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 //    var location = Location(52.245696, -7.139102, 15f)
+    var edit = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        var edit = false
 
         binding = ActivityFoodchallengesplaceBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -113,9 +112,10 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.menu_foodchallengeplace, menu)
-    return super.onCreateOptionsMenu(menu)
-}
+        menuInflater.inflate(R.menu.menu_foodchallengeplace, menu)
+        if (edit) menu.getItem(0).isVisible = true
+        return super.onCreateOptionsMenu(menu)
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
