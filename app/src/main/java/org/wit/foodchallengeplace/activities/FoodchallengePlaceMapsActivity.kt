@@ -51,7 +51,7 @@ class FoodchallengePlaceMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerCl
         contentBinding.currentRestaurant.text = foodchallengeplace!!.restaurant
         contentBinding.currentAddress.text = foodchallengeplace!!.address
         contentBinding.currentDifficulty.text = foodchallengeplace!!.difficulty
-//        contentBinding.currentImage.setImageBitmap(readImageFromPath(this@FoodchallengePlaceMapsActivity, foodchallengeplace.image))
+        // contentBinding.foodchallengeplaceImage.setImageBitmap(readImageFromPath(this@FoodchallengePlaceMapsActivity, foodchallengeplace.image))
         return true
     }
 
