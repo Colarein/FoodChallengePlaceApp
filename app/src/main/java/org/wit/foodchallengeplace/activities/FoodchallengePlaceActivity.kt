@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.NumberPicker
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -42,9 +43,6 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
         binding.foodchallengetoolbarAdd.title = title
         setSupportActionBar(binding.foodchallengetoolbarAdd)
 
-//        binding.difficultyPicker.maxValue = 5;
-//        binding.difficultyPicker.minValue = 1;
-
         app = application as MainApp
 
         i("Foodchallenge Place Activity started...")
@@ -57,6 +55,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
             binding.restaurant.setText(foodchallengeplace.restaurant)
             binding.address.setText(foodchallengeplace.address)
             binding.difficulty.setText(foodchallengeplace.difficulty)
+            // binding.challengePicker.setText(foodchallengeplace.challengePicker)
             binding.btnAdd.setText(R.string.save_foodchallengeplace)
             Picasso.get()
                 .load(foodchallengeplace.image)
@@ -70,7 +69,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
             foodchallengeplace.restaurant = binding.restaurant.text.toString()
             foodchallengeplace.address = binding.address.text.toString()
             foodchallengeplace.difficulty = binding.difficulty.text.toString()
-//            foodchallengeplace.difficulty = binding.difficulty.text.toString().toInt()
+           //  foodchallengeplace.challengePicker = binding.challengePicker.text.toString()
             if (foodchallengeplace.title.isEmpty()) {
                 Snackbar
                     .make(it, R.string.enter_foodchallengeplace_title, Snackbar.LENGTH_LONG)
@@ -85,6 +84,11 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
+
+//        binding.challengePicker.setOnValueChangedListener { _, _, newVal ->
+//            //Display the newly selected number to paymentAmount
+//            binding.challengePicker.setText("$newVal")
+//        }
 
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
@@ -109,6 +113,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
 
         registerImagePickerCallback()
         registerMapCallback()
+        setupChallengePicker()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -130,7 +135,8 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun registerImagePickerCallback() {
+
+        private fun registerImagePickerCallback() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             { result ->
@@ -168,5 +174,18 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
+    }
+
+    private fun setupChallengePicker() {
+        val challengePicker = binding.challengePicker
+        val values = arrayOf("Spicy", "BIG", "Speed")
+        challengePicker.minValue = 0
+        challengePicker.maxValue = values.size - 1
+        challengePicker.displayedValues = values
+        challengePicker.wrapSelectorWheel = true
+        challengePicker.setOnValueChangedListener { picker, oldVal, newVal ->
+            val text = "Changed from " + values[oldVal] + " to " + values[newVal]
+            Toast.makeText(this@FoodchallengePlaceActivity, text, Toast.LENGTH_SHORT).show()
+        }
     }
 }

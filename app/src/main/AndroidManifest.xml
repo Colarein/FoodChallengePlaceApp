@@ -14,15 +14,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodchallengePlace">
+
         <activity
-            android:name="org.wit.foodchallengeplace.activities.FoodchallengePlaceMapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_foodchallenge_place_maps"
-            android:theme="@style/Theme.FoodchallengePlace.NoActionBar" />
+            android:name=".activities.SplashScreenActivity"
+            android:theme="@style/Theme.FoodchallengePlace.NoActionBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
+
+        <activity
+            android:name=".activities.FoodchallengePlaceMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_foodchallenge_place_maps"
+            android:theme="@style/Theme.FoodchallengePlace.NoActionBar" />
 
         <activity
             android:name=".activities.MapActivity"
@@ -30,13 +41,7 @@
             android:label="@string/title_activity_map" />
         <activity
             android:name=".activities.FoodchallengeListActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activities.FoodchallengePlaceActivity"
             android:exported="true" />

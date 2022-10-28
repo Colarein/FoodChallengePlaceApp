@@ -25,62 +25,89 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="201dp">
 
             <ImageView
                 android:id="@+id/foodchallengeplaceImage"
                 android:layout_width="121dp"
                 android:layout_height="98dp"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/foodchallengeplace_image_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic"
-                android:contentDescription="@string/foodchallengeplace_image_placeholder" />
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView
                 android:id="@+id/currentTitle"
                 android:layout_width="175dp"
-                android:layout_height="21dp"
-                android:layout_margin="16dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="1dp"
                 android:text="@string/foodchallengeplace_title_placeholder"
                 app:layout_constraintEnd_toStartOf="@+id/foodchallengeplaceImage"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.10" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/currentRestaurant"
                 android:layout_width="175dp"
-                android:layout_height="21dp"
-                android:layout_margin="16dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="1dp"
                 android:text="@string/foodchallengeplace_restaurant_placeholder"
-                app:layout_constraintBottom_toBottomOf="@+id/currentTitle"
                 app:layout_constraintBottom_toTopOf="@+id/currentAddress"
                 app:layout_constraintEnd_toStartOf="@+id/foodchallengeplaceImage"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentTitle"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/currentAddress"
                 android:layout_width="175dp"
-                android:layout_height="21dp"
-                android:layout_margin="16dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="1dp"
                 android:text="@string/foodchallengeplace_address_placeholder"
-                app:layout_constraintBottom_toBottomOf="@+id/currentRestaurant"
                 app:layout_constraintBottom_toTopOf="@+id/currentDifficulty"
                 app:layout_constraintEnd_toStartOf="@+id/foodchallengeplaceImage"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentRestaurant" />
 
             <TextView
                 android:id="@+id/currentDifficulty"
                 android:layout_width="175dp"
-                android:layout_height="21dp"
-                android:layout_margin="16dp"
-                android:layout_marginBottom="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="1dp"
                 android:text="@string/foodchallengeplace_difficulty_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/foodchallengeplaceImage"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentAddress" />
+
+            <TextView
+                android:id="@+id/currentChallengePicker"
+                android:layout_width="175dp"
+                android:layout_height="21dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/foodchallengeplace_challengepicker_placeholder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/foodchallengeplaceImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentDifficulty"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -88,9 +115,9 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="372dp"
-        android:layout_height="435dp"
+        android:layout_height="430dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
