@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
 import org.wit.foodchallengeplace.R
+import org.wit.foodchallengeplace.activities.ui.login.LoginActivity
 import timber.log.Timber
 
 @Suppress("DEPRECATION")
@@ -20,10 +21,8 @@ class SplashScreenActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
         )
 
-        // Timber.i("Splash Activity started...")
-
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashScreenActivity, FoodchallengeListActivity::class.java)
+            val intent = Intent(this@SplashScreenActivity, LoginActivity::class.java)
             startActivity(intent)
             Timber.i("Splash Activity started...")
             finish()
