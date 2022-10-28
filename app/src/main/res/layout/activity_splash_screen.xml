@@ -18,6 +18,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <TextView
+        android:id="@+id/text_view_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food Challenge Places"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:fontFamily="casual"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SplashScreenImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
