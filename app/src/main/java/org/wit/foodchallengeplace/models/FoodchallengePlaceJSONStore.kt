@@ -63,6 +63,11 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
         serialize()
     }
 
+//    override fun deleteAll(foodchallengeplace: FoodchallengePlaceModel) {
+//        foodchallengeplaces.removeAll(foodchallengeplaces)
+//        serialize()
+//    }
+
     override fun findById(id:Long) : FoodchallengePlaceModel? {
         val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.id == id }
         return foundFoodchallengeplace

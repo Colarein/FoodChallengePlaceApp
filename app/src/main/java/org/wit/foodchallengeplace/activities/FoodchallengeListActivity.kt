@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.common.util.ArrayUtils.removeAll
 import kotlinx.coroutines.delay
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.adapters.FoodchallengePlaceAdapter
@@ -35,10 +36,12 @@ class FoodchallengeListActivity : AppCompatActivity(), FoodchallengePlaceListene
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = FoodchallengePlaceAdapter(app.foodchallengeplaces.findAll(), this)
-        loadFoodchallengeplaces()
 
+        loadFoodchallengeplaces()
+        // deleteFoodchallengeplaces()
         registerRefreshCallback()
         registerMapCallback()
+
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -79,6 +82,10 @@ class FoodchallengeListActivity : AppCompatActivity(), FoodchallengePlaceListene
     private fun loadFoodchallengeplaces() {
         showFoodchallengeplaces(app.foodchallengeplaces.findAll())
     }
+
+//    fun deleteFoodchallengeplaces(foodchallengeplaces: List<FoodchallengePlaceModel>) {
+//        (app.foodchallengeplaces.removeAll())
+//    }
 
     fun showFoodchallengeplaces (foodchallengeplaces: List<FoodchallengePlaceModel>) {
         binding.recyclerView.adapter = FoodchallengePlaceAdapter(foodchallengeplaces, this)

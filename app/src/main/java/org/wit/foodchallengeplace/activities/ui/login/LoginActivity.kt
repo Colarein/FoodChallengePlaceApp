@@ -105,7 +105,6 @@ class LoginActivity : AppCompatActivity() {
         val displayName = model.displayName
         val intent = Intent(this@LoginActivity, FoodchallengeListActivity::class.java)
         startActivity(intent)
-//        Timber.i("Splash Activity started...")
         Toast.makeText(
             applicationContext,
             "$welcome $displayName",
