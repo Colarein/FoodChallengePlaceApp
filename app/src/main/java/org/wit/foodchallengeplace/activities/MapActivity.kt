@@ -23,6 +23,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarker
     private lateinit var map: GoogleMap
     var location = Location()
 
+    @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
@@ -64,6 +65,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarker
         return false
     }
 
+    @Suppress("DEPRECATION")
     override fun onBackPressed() {
         val resultIntent = Intent()
         resultIntent.putExtra("location", location)

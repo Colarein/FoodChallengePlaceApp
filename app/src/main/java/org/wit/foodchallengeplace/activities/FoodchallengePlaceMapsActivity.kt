@@ -47,10 +47,18 @@ class FoodchallengePlaceMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerCl
     override fun onMarkerClick(marker: Marker): Boolean {
         val tag = marker.tag as Long
         val foodchallengeplace = app.foodchallengeplaces.findById(tag)
-        contentBinding.currentTitle.text = foodchallengeplace!!.title
-        contentBinding.currentRestaurant.text = foodchallengeplace!!.restaurant
-        contentBinding.currentAddress.text = foodchallengeplace!!.address
-        contentBinding.currentDifficulty.text = foodchallengeplace!!.difficulty
+        if (foodchallengeplace != null) {
+            contentBinding.currentTitle.text = foodchallengeplace.title
+        }
+        if (foodchallengeplace != null) {
+            contentBinding.currentRestaurant.text = foodchallengeplace.restaurant
+        }
+        if (foodchallengeplace != null) {
+            contentBinding.currentAddress.text = foodchallengeplace.address
+        }
+        if (foodchallengeplace != null) {
+            contentBinding.currentDifficulty.text = foodchallengeplace.difficulty
+        }
         // contentBinding.foodchallengeplaceImage.setImageBitmap(readImageFromPath(this@FoodchallengePlaceMapsActivity, foodchallengeplace.image))
         return true
     }

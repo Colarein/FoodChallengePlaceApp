@@ -47,7 +47,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
 
         i("Foodchallenge Place Activity started...")
 
-
+        @Suppress("DEPRECATION")
         if (intent.hasExtra("foodchallengeplace_edit")) {
             edit = true
             foodchallengeplace = intent.extras?.getParcelable("foodchallengeplace_edit")!!
@@ -156,6 +156,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
             }
     }
 
+    @Suppress("DEPRECATION")
     private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -183,7 +184,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
         challengePicker.maxValue = values.size - 1
         challengePicker.displayedValues = values
         challengePicker.wrapSelectorWheel = true
-        challengePicker.setOnValueChangedListener { picker, oldVal, newVal ->
+        challengePicker.setOnValueChangedListener { _, oldVal, newVal ->
             val text = "Changed from " + values[oldVal] + " to " + values[newVal]
             Toast.makeText(this@FoodchallengePlaceActivity, text, Toast.LENGTH_SHORT).show()
         }
