@@ -59,6 +59,10 @@ class FoodchallengePlaceMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerCl
         if (foodchallengeplace != null) {
             contentBinding.currentDifficulty.text = foodchallengeplace.difficulty
         }
+
+        if (foodchallengeplace != null) {
+            contentBinding.currentChallengePicker.text = foodchallengeplace.challengePicker.toString()
+        }
         // contentBinding.foodchallengeplaceImage.setImageBitmap(readImageFromPath(this@FoodchallengePlaceMapsActivity, foodchallengeplace.image))
         return true
     }

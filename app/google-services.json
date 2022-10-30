@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "644597296255",
+    "project_id": "foodchallenge-app",
+    "storage_bucket": "foodchallenge-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644597296255:android:e4c8a2e498b3dab69ce34a",
+        "android_client_info": {
+          "package_name": "org.wit.foodchallengeplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644597296255-tfh24hjokvipahalvoc63igv5eskfv30.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPmYLd_MiFHhzK25qJSSlD7_Mpjt4Oa8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644597296255-tfh24hjokvipahalvoc63igv5eskfv30.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

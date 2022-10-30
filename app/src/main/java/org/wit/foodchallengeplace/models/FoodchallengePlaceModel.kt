@@ -2,6 +2,7 @@ package org.wit.foodchallengeplace.models
 
 import android.net.Uri
 import android.os.Parcelable
+import com.google.firebase.database.snapshot.Index
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -11,7 +12,7 @@ data class FoodchallengePlaceModel(
     var restaurant: String = "",
     var address: String = "",
     var difficulty: String = "",
-    var challengePicker: String = "",
+    var challengePicker: Int = 0,
     var image: Uri = Uri.EMPTY,
     var lat: Double = 0.0,
     var lng: Double = 0.0,

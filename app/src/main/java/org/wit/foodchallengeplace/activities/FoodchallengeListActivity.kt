@@ -2,15 +2,15 @@ package org.wit.foodchallengeplace.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
+// import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.common.util.ArrayUtils.removeAll
-import kotlinx.coroutines.delay
+// import com.google.android.gms.common.util.ArrayUtils.removeAll
+// import kotlinx.coroutines.delay
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.adapters.FoodchallengePlaceAdapter
 import org.wit.foodchallengeplace.adapters.FoodchallengePlaceListener
