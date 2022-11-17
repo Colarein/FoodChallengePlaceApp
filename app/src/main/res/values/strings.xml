@@ -11,9 +11,9 @@
     <string name="enter_foodchallengeplace_title"> Please enter the Food Challenge Title </string>
     <string name="save_foodchallengeplace"> Save Food Challenge </string>
     <string name="button_addImage"> Add Image </string>
-    <string name="select_foodchallengeplace_image">Select Food Challenge Image</string>
-    <string name="change_foodchallengeplace_image"> Change Food Challenge Image</string>
-    <string name="button_location">Save Food Challenge Location</string>
+    <string name="select_foodchallengeplace_image">Select Image</string>
+    <string name="change_foodchallengeplace_image"> Change Image</string>
+    <string name="button_location">Save Location</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="menu_deleteFoodchallengeplace">Delete</string>
     <string name="title_activity_foodchallenge_place_maps">Map of All Foodchallenge Places</string>
