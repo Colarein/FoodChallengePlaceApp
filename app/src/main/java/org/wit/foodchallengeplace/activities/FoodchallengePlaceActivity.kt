@@ -1,12 +1,10 @@
 package org.wit.foodchallengeplace.activities
 
 import android.content.Intent
-//import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -23,7 +21,6 @@ import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.Location
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import timber.log.Timber.i
-import kotlin.math.absoluteValue
 
 
 class FoodchallengePlaceActivity : AppCompatActivity() {
@@ -34,7 +31,6 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
 
-    //    var location = Location(52.245696, -7.139102, 15f)
     var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,7 +111,7 @@ class FoodchallengePlaceActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_foodchallengeplace, menu)
-        if (edit) menu.getItem(0).isVisible = true
+        if (edit && menu != null) menu.getItem(0).setVisible(true)
         return super.onCreateOptionsMenu(menu)
     }
 
