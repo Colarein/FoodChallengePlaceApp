@@ -2,9 +2,9 @@
     <string name="app_name">Foodchallenge Place</string>
     <string name="button_addFoodchallengeplace">Add Food Challenge</string>
     <string name="hint_foodchallengeplaceTitle">Food Challenge Title</string>
-    <string name="hint_foodchallengeplaceRestaurant">Restaurant </string>
-    <string name="hint_foodchallengeplaceAddress">Address </string>
-    <string name="hint_foodchallengeplaceDifficulty">Difficulty </string>
+    <string name="hint_restaurant">Restaurant </string>
+    <string name="hint_address">Address </string>
+    <string name="hint_difficulty">Difficulty </string>
     <string name="menu_addFoodchallengeplace">Add</string>
     <string name="menu_deleteAllFoodchallengeplace">Delete All</string>
     <string name="menu_cancelFoodchallengeplace">Cancel</string>
