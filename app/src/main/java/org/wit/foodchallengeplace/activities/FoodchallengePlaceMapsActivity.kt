@@ -8,6 +8,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengeplaceMapsBinding
 import org.wit.foodchallengeplace.databinding.ContentFoodchallengePlaceMapsBinding
@@ -66,7 +67,11 @@ class FoodchallengePlaceMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerCl
         if (foodchallengeplace != null) {
             contentBinding.currentChallengePicker.text = foodchallengeplace.challengePicker.toString()
         }
-        // contentBinding.foodchallengeplaceImage.setImageBitmap(readImageFromPath(this@FoodchallengePlaceMapsActivity, foodchallengeplace.image))
+        if (foodchallengeplace != null) {
+            Picasso.get()
+                .load(foodchallengeplace.image)
+                .into(contentBinding.foodchallengeplaceImage)
+        }
         return true
     }
 
