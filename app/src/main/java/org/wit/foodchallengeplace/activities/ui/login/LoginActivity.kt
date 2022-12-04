@@ -14,9 +14,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
 import org.wit.foodchallengeplace.R
-import org.wit.foodchallengeplace.activities.FoodchallengeListActivity
+import org.wit.foodchallengeplace.views.foodchallengeplacelist.FoodchallengePlaceListView
 import org.wit.foodchallengeplace.databinding.ActivityLoginBinding
-import timber.log.Timber
 
 class LoginActivity : AppCompatActivity() {
 
@@ -103,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
-        val intent = Intent(this@LoginActivity, FoodchallengeListActivity::class.java)
+        val intent = Intent(this@LoginActivity, FoodchallengePlaceListView::class.java)
         startActivity(intent)
         Toast.makeText(
             applicationContext,

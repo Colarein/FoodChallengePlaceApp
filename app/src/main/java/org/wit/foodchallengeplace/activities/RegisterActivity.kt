@@ -9,7 +9,7 @@ import com.google.firebase.database.FirebaseDatabase
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.databinding.ActivityRegisterBinding
 import org.wit.foodchallengeplace.models.UserModel
-
+import org.wit.foodchallengeplace.views.foodchallengeplacelist.FoodchallengePlaceListView
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -47,7 +47,7 @@ class RegisterActivity : AppCompatActivity() {
 
             }
             val welcome = getString(R.string.welcome)
-            val intent = Intent(this@RegisterActivity, FoodchallengeListActivity::class.java)
+            val intent = Intent(this@RegisterActivity, FoodchallengePlaceListView::class.java)
             startActivity(intent)
             Toast.makeText(
                 applicationContext,

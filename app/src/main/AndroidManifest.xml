@@ -38,19 +38,19 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".activities.FoodchallengePlaceMapsActivity"
+            android:name=".views.map.FoodChallengePlaceMapView"
             android:exported="false"
             android:label="@string/title_activity_foodchallenge_place_maps"
             android:theme="@style/Theme.FoodchallengePlace.NoActionBar" />
         <activity
-            android:name=".activities.MapActivity"
+            android:name=".views.location.EditLocationView"
             android:exported="true"
             android:label="@string/title_activity_map" />
         <activity
-            android:name=".activities.FoodchallengeListActivity"
+            android:name=".views.foodchallengeplacelist.FoodchallengePlaceListView"
             android:exported="true" />
         <activity
-            android:name=".activities.FoodchallengePlaceActivity"
+            android:name=".views.foodchallengeplace.FoodchallengePlaceView"
             android:exported="true" />
     </application>
 
