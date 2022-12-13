@@ -5,7 +5,6 @@ import org.wit.foodchallengeplace.databinding.ActivityFoodchallengesplaceBinding
 import org.wit.foodchallengeplace.helpers.showImagePicker
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import org.wit.foodchallengeplace.models.Location
-import org.wit.foodchallengeplace.views.*
 import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher

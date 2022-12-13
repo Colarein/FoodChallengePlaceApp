@@ -26,8 +26,8 @@ abstract class FoodchallengePlaceView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_foodchallengesplace)
-        binding.foodchallengetoolbarAdd.title = title
-        setSupportActionBar(binding.foodchallengetoolbarAdd)
+        binding.foodchallengeToolbarAdd.title = title
+        setSupportActionBar(binding.foodchallengeToolbarAdd)
 
         presenter = FoodchallengePlacePresenter(this)
 
