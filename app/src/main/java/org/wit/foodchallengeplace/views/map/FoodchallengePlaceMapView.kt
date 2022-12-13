@@ -10,7 +10,7 @@ import org.wit.foodchallengeplace.databinding.ContentFoodchallengePlaceMapsBindi
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 
-class FoodChallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
+class FoodchallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
 
     private lateinit var binding: ActivityFoodchallengeplaceMapsBinding
     private lateinit var contentBinding: ContentFoodchallengePlaceMapsBinding
@@ -36,7 +36,6 @@ class FoodChallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickL
     fun showFoodchallengeplaces(foodchallengeplace: FoodchallengePlaceModel) {
         contentBinding.currentTitle.text = foodchallengeplace.title
         contentBinding.currentRestaurant.text = foodchallengeplace.restaurant
-        contentBinding.currentAddress.text = foodchallengeplace.address
         contentBinding.currentDifficulty.text = foodchallengeplace.difficulty
         contentBinding.currentChallengePicker.text = foodchallengeplace.challengePicker.toString()
 
@@ -74,6 +73,5 @@ class FoodChallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickL
         super.onSaveInstanceState(outState)
         contentBinding.mapView.onSaveInstanceState(outState)
     }
-
 
 }

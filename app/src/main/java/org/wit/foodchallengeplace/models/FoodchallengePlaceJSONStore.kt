@@ -47,7 +47,6 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
         if (foundFoodchallengeplace != null) {
             foundFoodchallengeplace.title = foodchallengeplace.title
             foundFoodchallengeplace.restaurant = foodchallengeplace.restaurant
-            foundFoodchallengeplace.address = foodchallengeplace.address
             foundFoodchallengeplace.difficulty = foodchallengeplace.difficulty
             foundFoodchallengeplace.challengePicker = foodchallengeplace.challengePicker
             foundFoodchallengeplace.image = foodchallengeplace.image
@@ -59,7 +58,8 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
     }
 
     override fun delete(foodchallengeplace: FoodchallengePlaceModel) {
-        foodchallengeplaces.remove(foodchallengeplace)
+        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.id == foodchallengeplace.id }
+        foodchallengeplaces.remove(foundFoodchallengeplace)
         serialize()
     }
 

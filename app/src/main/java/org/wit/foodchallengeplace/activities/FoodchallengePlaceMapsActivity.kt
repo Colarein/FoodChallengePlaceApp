@@ -58,9 +58,6 @@ class FoodchallengePlaceMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerCl
             contentBinding.currentRestaurant.text = foodchallengeplace.restaurant
         }
         if (foodchallengeplace != null) {
-            contentBinding.currentAddress.text = foodchallengeplace.address
-        }
-        if (foodchallengeplace != null) {
             contentBinding.currentDifficulty.text = foodchallengeplace.difficulty
         }
 

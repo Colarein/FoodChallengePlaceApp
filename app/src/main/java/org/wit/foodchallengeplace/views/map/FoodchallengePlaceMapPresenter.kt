@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.foodchallengeplace.main.MainApp
 
-class FoodchallengePlaceMapPresenter(val view: FoodChallengePlaceMapView) {
+class FoodchallengePlaceMapPresenter(val view: FoodchallengePlaceMapView) {
     var app: MainApp
 
     init {

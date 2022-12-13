@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".views.map.FoodChallengePlaceMapView"
+    tools:context=".views.map.FoodchallengePlaceMapView"
     tools:showIn="@layout/activity_foodchallengeplace_maps">
 
     <androidx.cardview.widget.CardView

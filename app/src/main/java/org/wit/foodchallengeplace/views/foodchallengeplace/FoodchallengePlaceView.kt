@@ -1,10 +1,14 @@
+@file:Suppress("DEPRECATION")
+
 package org.wit.foodchallengeplace.views.foodchallengeplace
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.foodchallengeplace.R
@@ -12,52 +16,37 @@ import org.wit.foodchallengeplace.databinding.ActivityFoodchallengesplaceBinding
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import timber.log.Timber.i
 
-class FoodchallengePlaceView : AppCompatActivity() {
+abstract class FoodchallengePlaceView : AppCompatActivity() {
+
     private lateinit var binding: ActivityFoodchallengesplaceBinding
     private lateinit var presenter: FoodchallengePlacePresenter
+    lateinit var map: GoogleMap
     var foodchallengeplace = FoodchallengePlaceModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-        binding = ActivityFoodchallengesplaceBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_foodchallengesplace)
         binding.foodchallengetoolbarAdd.title = title
         setSupportActionBar(binding.foodchallengetoolbarAdd)
 
         presenter = FoodchallengePlacePresenter(this)
-        binding.btnAdd.setOnClickListener {
-            foodchallengeplace.title = binding.foodchallengeplaceTitle.text.toString()
-            foodchallengeplace.restaurant = binding.restaurant.text.toString()
-            foodchallengeplace.address = binding.address.text.toString()
-            foodchallengeplace.difficulty = binding.difficulty.text.toString()
-
-            if (foodchallengeplace.title.isEmpty()) {
-                Snackbar.make(it,R.string.enter_foodchallengeplace_title, Snackbar.LENGTH_LONG)
-                    .show()
-            } else {
-                presenter.doAddOrSave(
-                    foodchallengeplace.title,
-                    foodchallengeplace.restaurant,
-                    foodchallengeplace.address,
-                    foodchallengeplace.difficulty,
-                    foodchallengeplace.challengePicker)
-
-            }
-            i("add Button Pressed: $foodchallengeplace")
-            setResult(RESULT_OK)
-            finish()
-        }
 
         binding.chooseImage.setOnClickListener {
+            presenter.cacheFoodchallengeplace(binding.foodchallengeplaceTitle.text.toString(), binding.restaurant.text.toString(), binding.difficulty.text.toString(),
+                arrayOf(binding.challengePicker.value))
             presenter.doSelectImage()
         }
 
         binding.foodchallengeplaceLocation.setOnClickListener {
+            presenter.cacheFoodchallengeplace(binding.foodchallengeplaceTitle.text.toString(), binding.restaurant.text.toString(), binding.difficulty.text.toString(),
+                arrayOf(binding.challengePicker.value))
             presenter.doSetLocation()
         }
-
+        binding.mapView2.onCreate(savedInstanceState)
+        binding.mapView2.getMapAsync {
+            map = it
+            presenter.doConfigureMap(map)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -72,33 +61,55 @@ class FoodchallengePlaceView : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
+        when (item.itemId) {
+            R.id.item_save -> {
+                if (binding.foodchallengeplaceTitle.text.toString().isEmpty()) {
+                    Snackbar.make(binding.root, R.string.enter_foodchallengeplace_title, Snackbar.LENGTH_LONG)
+                        .show()
+                } else {
+                    presenter.doAddOrSave(binding.foodchallengeplaceTitle.text.toString(),
+                        binding.restaurant.text.toString(), binding.difficulty.text.toString(),arrayOf(binding.challengePicker.value))
+                }
+            }
             R.id.item_delete -> {
                 presenter.doDelete()
             }
-            R.id.item_cancel -> {
-                presenter.doCancel()
-            }
+//            R.id.item_cancel -> {
+//                presenter.doCancel()
+//            }
+
         }
         return super.onOptionsItemSelected(item)
     }
 
-    fun showFoodchallengeplaces(foodchallengeplace: FoodchallengePlaceModel) {
+    fun showFoodchallengeplace(foodchallengeplace: FoodchallengePlaceModel) {
         binding.foodchallengeplaceTitle.setText(foodchallengeplace.title)
         binding.restaurant.setText(foodchallengeplace.restaurant)
-        binding.address.setText(foodchallengeplace.address)
         binding.difficulty.setText(foodchallengeplace.difficulty)
-        // binding.challengePicker.setText(foodchallengeplace.challengePicker)
+        arrayOf(binding.challengePicker.value)
 
         Picasso.get()
             .load(foodchallengeplace.image)
             .into(binding.foodchallengeplaceImage)
         if (foodchallengeplace.image != Uri.EMPTY) {
             binding.chooseImage.setText(R.string.change_foodchallengeplace_image)
-        }
 
+        }
     }
+//
+//    @Deprecated("Deprecated in Java")
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (data != null) {
+//            presenter.doActivityResult(requestCode, resultCode, data)
+//        }
+//    }
+
+//    override fun onBackPressed() {
+//        presenter.doCancel()
+//    }
 
     fun updateImage(image: Uri){
         i("Image updated")
@@ -107,4 +118,28 @@ class FoodchallengePlaceView : AppCompatActivity() {
             .into(binding.foodchallengeplaceImage)
         binding.chooseImage.setText(R.string.change_foodchallengeplace_image)
     }
+        override fun onDestroy() {
+            super.onDestroy()
+            binding.mapView2.onDestroy()
+        }
+
+        override fun onLowMemory() {
+            super.onLowMemory()
+            binding.mapView2.onLowMemory()
+        }
+
+        override fun onPause() {
+            super.onPause()
+            binding.mapView2.onPause()
+        }
+
+        override fun onResume() {
+            super.onResume()
+            binding.mapView2.onResume()
+        }
+
+        override fun onSaveInstanceState(outState: Bundle) {
+            super.onSaveInstanceState(outState)
+            binding.mapView2.onSaveInstanceState(outState)
+        }
 }

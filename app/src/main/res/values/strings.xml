@@ -6,6 +6,7 @@
     <string name="hint_address">Address </string>
     <string name="hint_difficulty">Difficulty </string>
     <string name="menu_addFoodchallengeplace">Add</string>
+    <string name="menu_saveFoodchallengeplace">Save</string>
     <string name="menu_deleteAllFoodchallengeplace">Delete All</string>
     <string name="menu_cancelFoodchallengeplace">Cancel</string>
     <string name="enter_foodchallengeplace_title"> Please enter the Food Challenge Title </string>
