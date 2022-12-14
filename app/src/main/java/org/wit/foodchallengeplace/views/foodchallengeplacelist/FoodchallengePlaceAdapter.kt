@@ -1,4 +1,4 @@
-package org.wit.foodchallengeplace.adapters
+package org.wit.foodchallengeplace.views.foodchallengeplacelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ interface FoodchallengePlaceListener {
 }
 
 class FoodchallengePlaceAdapter constructor(private var foodchallengeplaces: List<FoodchallengePlaceModel>,
-                                            private val listener: FoodchallengePlaceListener):
+                                            private val listener: FoodchallengePlaceListener) :
     RecyclerView.Adapter<FoodchallengePlaceAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -31,12 +31,12 @@ class FoodchallengePlaceAdapter constructor(private var foodchallengeplaces: Lis
     class MainHolder(private val binding : CardFoodchallengeplaceBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(foodchallengeplace: FoodchallengePlaceModel, listener:FoodchallengePlaceListener) {
+        fun bind(foodchallengeplace: FoodchallengePlaceModel, listener: FoodchallengePlaceListener) {
             binding.foodchallengeplaceTitle.text = foodchallengeplace.title
             binding.restaurant.text = foodchallengeplace.restaurant
             binding.difficulty.text = foodchallengeplace.difficulty
-            binding.challengePicker.text = foodchallengeplace.challengePicker.toString()
-            Picasso.get().load(foodchallengeplace.image).resize(200,200).into(binding.imageIcon)
+            // binding.challengePicker.text = foodchallengeplace.challengePicker.toString()
+            Picasso.get().load(foodchallengeplace.image).resize(100,100).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onFoodchallengeplaceClick(foodchallengeplace) }
         }
     }

@@ -47,6 +47,7 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback,
         return false
     }
 
+    @Deprecated("Deprecated in Java", ReplaceWith("presenter.doOnBackPressed()"))
     override fun onBackPressed() {
         presenter.doOnBackPressed()
 

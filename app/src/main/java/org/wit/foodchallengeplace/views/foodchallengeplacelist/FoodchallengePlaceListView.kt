@@ -6,8 +6,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.foodchallengeplace.R
-import org.wit.foodchallengeplace.adapters.FoodchallengePlaceAdapter
-import org.wit.foodchallengeplace.adapters.FoodchallengePlaceListener
+import org.wit.foodchallengeplace.views.foodchallengeplacelist.FoodchallengePlaceAdapter
+import org.wit.foodchallengeplace.views.foodchallengeplacelist.FoodchallengePlaceListener
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengeListBinding
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
@@ -21,7 +21,7 @@ class FoodchallengePlaceListView : AppCompatActivity(), FoodchallengePlaceListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFoodchallengeListBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_foodchallenge_list)
+        setContentView(binding.root)
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
 
@@ -34,10 +34,10 @@ class FoodchallengePlaceListView : AppCompatActivity(), FoodchallengePlaceListen
 
     }
 
-    fun showFoodchallengeplaces(foodchallengeplaces: List<FoodchallengePlaceModel>) {
-        binding.recyclerView.adapter = FoodchallengePlaceAdapter(foodchallengeplaces, this)
-        binding.recyclerView.adapter?.notifyDataSetChanged()
-    }
+//    fun showFoodchallengeplaces(foodchallengeplaces: List<FoodchallengePlaceModel>) {
+//        binding.recyclerView.adapter = FoodchallengePlaceAdapter(foodchallengeplaces, this)
+//        binding.recyclerView.adapter?.notifyDataSetChanged()
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)

@@ -28,7 +28,7 @@ class FoodchallengePlaceMemStore : FoodchallengePlaceStore {
             foundFoodchallengeplace.title = foodchallengeplace.title
             foundFoodchallengeplace.restaurant = foodchallengeplace.restaurant
             foundFoodchallengeplace.difficulty = foodchallengeplace.difficulty
-            foundFoodchallengeplace.challengePicker = foodchallengeplace.challengePicker
+            // foundFoodchallengeplace.challengePicker = foodchallengeplace.challengePicker
             foundFoodchallengeplace.image = foodchallengeplace.image
             foundFoodchallengeplace.lat = foodchallengeplace.lat
             foundFoodchallengeplace.lng = foodchallengeplace.lng

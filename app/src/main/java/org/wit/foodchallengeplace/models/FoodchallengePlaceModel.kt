@@ -11,7 +11,7 @@ data class FoodchallengePlaceModel(
     var title: String = "",
     var restaurant: String = "",
     var difficulty: String = "",
-    var challengePicker: Array<Int> = emptyArray(),
+    // var challengePicker: Array<Int> = emptyArray(),
     var image: Uri = Uri.EMPTY,
     var lat: Double = 0.0,
     var lng: Double = 0.0,

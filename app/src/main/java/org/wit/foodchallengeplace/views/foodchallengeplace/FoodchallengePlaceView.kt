@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengesplaceBinding
+import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import timber.log.Timber.i
 
@@ -20,26 +21,30 @@ abstract class FoodchallengePlaceView : AppCompatActivity() {
 
     private lateinit var binding: ActivityFoodchallengesplaceBinding
     private lateinit var presenter: FoodchallengePlacePresenter
+    lateinit var app: MainApp
     lateinit var map: GoogleMap
     var foodchallengeplace = FoodchallengePlaceModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_foodchallengesplace)
+        binding = ActivityFoodchallengesplaceBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         binding.foodchallengeToolbarAdd.title = title
         setSupportActionBar(binding.foodchallengeToolbarAdd)
+
+        i("Foodchallenge Place Activity started...")
 
         presenter = FoodchallengePlacePresenter(this)
 
         binding.chooseImage.setOnClickListener {
-            presenter.cacheFoodchallengeplace(binding.foodchallengeplaceTitle.text.toString(), binding.restaurant.text.toString(), binding.difficulty.text.toString(),
-                arrayOf(binding.challengePicker.value))
+            presenter.cacheFoodchallengeplace(binding.foodchallengeplaceTitle.text.toString(), binding.restaurant.text.toString(), binding.difficulty.text.toString())
+                // arrayOf(binding.challengePicker.value))
             presenter.doSelectImage()
         }
 
         binding.foodchallengeplaceLocation.setOnClickListener {
-            presenter.cacheFoodchallengeplace(binding.foodchallengeplaceTitle.text.toString(), binding.restaurant.text.toString(), binding.difficulty.text.toString(),
-                arrayOf(binding.challengePicker.value))
+            presenter.cacheFoodchallengeplace(binding.foodchallengeplaceTitle.text.toString(), binding.restaurant.text.toString(), binding.difficulty.text.toString())
+                // arrayOf(binding.challengePicker.value))
             presenter.doSetLocation()
         }
         binding.mapView2.onCreate(savedInstanceState)
@@ -70,7 +75,8 @@ abstract class FoodchallengePlaceView : AppCompatActivity() {
                         .show()
                 } else {
                     presenter.doAddOrSave(binding.foodchallengeplaceTitle.text.toString(),
-                        binding.restaurant.text.toString(), binding.difficulty.text.toString(),arrayOf(binding.challengePicker.value))
+                        binding.restaurant.text.toString(), binding.difficulty.text.toString())
+                    //arrayOf(binding.challengePicker.value))
                 }
             }
             R.id.item_delete -> {

@@ -3,7 +3,6 @@ package org.wit.foodchallengeplace.views.foodchallengeplacelist
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import org.wit.foodchallengeplace.views.foodchallengeplace.FoodchallengePlaceView
@@ -14,14 +13,12 @@ class FoodchallengePlaceListPresenter(val view: FoodchallengePlaceListView) {
     var app: MainApp = view.application as MainApp
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var editIntentLauncher: ActivityResultLauncher<Intent>
-    private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
+    // private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
 
     init {
-        app = view.application as MainApp
         registerEditCallback()
-        registerMapCallback()
+        // registerMapCallback()
         registerRefreshCallback()
-        // registerImagePickerCallback()
     }
 
     fun getFoodchallengeplaces() = app.foodchallengeplaces.findAll()
@@ -55,11 +52,11 @@ class FoodchallengePlaceListPresenter(val view: FoodchallengePlaceListView) {
 
     }
 
-    private fun registerMapCallback() {
-        mapIntentLauncher =
-            view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { }
-    }
+//    private fun registerMapCallback() {
+//        mapIntentLauncher =
+//            view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+//            { }
+//    }
 
 //    private fun registerImagePickerCallback() {
 //        imageIntentLauncher =

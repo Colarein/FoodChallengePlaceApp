@@ -61,12 +61,13 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
 
     fun doAddOrSave(
         title: String, restaurant: String,
-        difficulty: String, challengePicker: Array<Int>
-    ) {
+        difficulty: String) // challengePicker: Array<Int>)
+
+     {
         foodchallengeplace.title = title
         foodchallengeplace.restaurant = restaurant
         foodchallengeplace.difficulty = difficulty
-        foodchallengeplace.challengePicker = challengePicker
+        // foodchallengeplace.challengePicker = challengePicker
         if (edit) {
             app.foodchallengeplaces.update(foodchallengeplace)
         } else {
@@ -113,12 +114,12 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
 
     fun cacheFoodchallengeplace (
         title: String, restaurant: String,
-        difficulty: String, challengePicker: Array<Int>
-    ) {
+        difficulty: String) //, challengePicker: Array<Int>)
+    {
         foodchallengeplace.title = title
         foodchallengeplace.restaurant = restaurant
         foodchallengeplace.difficulty = difficulty
-        foodchallengeplace.challengePicker = challengePicker
+        // foodchallengeplace.challengePicker = challengePicker
     }
     fun doConfigureMap(m: GoogleMap) {
         map = m

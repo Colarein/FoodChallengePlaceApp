@@ -48,7 +48,7 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
             foundFoodchallengeplace.title = foodchallengeplace.title
             foundFoodchallengeplace.restaurant = foodchallengeplace.restaurant
             foundFoodchallengeplace.difficulty = foodchallengeplace.difficulty
-            foundFoodchallengeplace.challengePicker = foodchallengeplace.challengePicker
+            // foundFoodchallengeplace.challengePicker = foodchallengeplace.challengePicker
             foundFoodchallengeplace.image = foodchallengeplace.image
             foundFoodchallengeplace.lat = foodchallengeplace.lat
             foundFoodchallengeplace.lng = foodchallengeplace.lng
@@ -104,4 +104,5 @@ class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
     ): JsonElement {
         return JsonPrimitive(src.toString())
     }
+
 }

@@ -61,9 +61,9 @@ class FoodchallengePlaceMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerCl
             contentBinding.currentDifficulty.text = foodchallengeplace.difficulty
         }
 
-        if (foodchallengeplace != null) {
-            contentBinding.currentChallengePicker.text = foodchallengeplace.challengePicker.toString()
-        }
+//        if (foodchallengeplace != null) {
+//            contentBinding.currentChallengePicker.text = foodchallengeplace.challengePicker.toString()
+//        }
         if (foodchallengeplace != null) {
             Picasso.get()
                 .load(foodchallengeplace.image)

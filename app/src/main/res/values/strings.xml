@@ -5,10 +5,15 @@
     <string name="hint_restaurant">Restaurant </string>
     <string name="hint_address">Address </string>
     <string name="hint_difficulty">Difficulty </string>
+    <!--    Menu Strings-->
     <string name="menu_addFoodchallengeplace">Add</string>
+    <string name="menu_mapMode">Map Mode</string>
     <string name="menu_saveFoodchallengeplace">Save</string>
+    <string name="menu_deleteFoodchallengeplace">Delete</string>
     <string name="menu_deleteAllFoodchallengeplace">Delete All</string>
     <string name="menu_cancelFoodchallengeplace">Cancel</string>
+
+    <!--    Foodchallenge Place Strings-->
     <string name="enter_foodchallengeplace_title"> Please enter the Food Challenge Title </string>
     <string name="save_foodchallengeplace"> Save Food Challenge </string>
     <string name="button_addImage"> Add Image </string>
@@ -16,7 +21,6 @@
     <string name="change_foodchallengeplace_image"> Change Image</string>
     <string name="button_location">Save Location</string>
     <string name="title_activity_map">MapActivity</string>
-    <string name="menu_deleteFoodchallengeplace">Delete</string>
     <string name="title_activity_foodchallenge_place_maps">Map of All Foodchallenge Places</string>
     <string name="foodchallengeplace_image_placeholder">Foodchallenge Place Image</string>
     <string name="foodchallengeplace_title_placeholder">Foodchallenge Place Title</string>
@@ -24,6 +28,8 @@
     <string name="foodchallengeplace_address_placeholder">Address</string>
     <string name="foodchallengeplace_difficulty_placeholder">Difficulty</string>
     <string name="foodchallengeplace_challengepicker_placeholder">Challenge Type</string>
+
+    <!--    Log In activity-->
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
