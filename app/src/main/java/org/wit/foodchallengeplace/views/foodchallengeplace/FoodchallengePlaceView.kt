@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package org.wit.foodchallengeplace.views.foodchallengeplace
 
 import android.content.Intent
