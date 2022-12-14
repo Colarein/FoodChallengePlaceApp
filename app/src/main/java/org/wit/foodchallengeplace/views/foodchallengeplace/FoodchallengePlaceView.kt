@@ -17,7 +17,7 @@ import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import timber.log.Timber.i
 
-abstract class FoodchallengePlaceView : AppCompatActivity() {
+class FoodchallengePlaceView : AppCompatActivity() {
 
     private lateinit var binding: ActivityFoodchallengesplaceBinding
     private lateinit var presenter: FoodchallengePlacePresenter
