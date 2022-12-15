@@ -89,6 +89,7 @@ class FoodchallengePlaceView : AppCompatActivity() {
     }
 
     fun showFoodchallengeplace(foodchallengeplace: FoodchallengePlaceModel) {
+        if (binding.foodchallengeplaceTitle.text.isEmpty())
         binding.foodchallengeplaceTitle.setText(foodchallengeplace.title)
         binding.restaurant.setText(foodchallengeplace.restaurant)
         binding.difficulty.setText(foodchallengeplace.difficulty)
