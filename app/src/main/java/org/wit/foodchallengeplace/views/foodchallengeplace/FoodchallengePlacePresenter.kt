@@ -11,6 +11,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,10 +21,11 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.views.location.EditLocationView
 import org.wit.foodchallengeplace.helpers.checkLocationPermissions
+import org.wit.foodchallengeplace.helpers.createDefaultLocationRequest
 import timber.log.Timber.i
 
-@Suppress("DEPRECATION")
 class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
+    private val locationRequest = createDefaultLocationRequest()
     var map: GoogleMap? = null
     var foodchallengeplace = FoodchallengePlaceModel()
     var app: MainApp = view.application as MainApp
@@ -43,14 +46,15 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
         doPermissionLauncher()
         registerImagePickerCallback()
         registerMapCallback()
-        setupChallengePicker()
+        // setupChallengePicker()
 
         if (view.intent.hasExtra("foodchallengeplace_edit")) {
             edit = true
+            @Suppress("DEPRECATION")
             foodchallengeplace = view.intent.extras?.getParcelable("foodchallengeplace_edit")!!
             view.showFoodchallengeplace(foodchallengeplace)
-        } else {
-
+        }
+        else {
             if (checkLocationPermissions(view)) {
                 doSetCurrentLocation()
             }
@@ -86,13 +90,12 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
     }
 
     fun doSelectImage() {
-        view.let {
+        // view.let {
             showImagePicker(imageIntentLauncher)
-        }
+        // }
     }
 
     fun doSetLocation() {
-
         if (foodchallengeplace.zoom != 0f) {
             location.lat = foodchallengeplace.lat
             location.lng = foodchallengeplace.lng
@@ -112,15 +115,21 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
         }
     }
 
-    fun cacheFoodchallengeplace (
-        title: String, restaurant: String,
-        difficulty: String) //, challengePicker: Array<Int>)
-    {
-        foodchallengeplace.title = title
-        foodchallengeplace.restaurant = restaurant
-        foodchallengeplace.difficulty = difficulty
-        // foodchallengeplace.challengePicker = challengePicker
+    @SuppressLint("MissingPermission")
+    fun doRestartLocationUpdates() {
+        var locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                if (locationResult.locations != null) {
+                    val l = locationResult.locations.last()
+                    locationUpdate(l.latitude, l.longitude)
+                }
+            }
+        }
+        if (!edit) {
+            locationService.requestLocationUpdates(locationRequest, locationCallback, null)
+        }
     }
+
     fun doConfigureMap(m: GoogleMap) {
         map = m
         locationUpdate(foodchallengeplace.lat, foodchallengeplace.lng)
@@ -136,6 +145,16 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
         map?.addMarker(options)
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(foodchallengeplace.lat, foodchallengeplace.lng), foodchallengeplace.zoom))
         view.showFoodchallengeplace(foodchallengeplace)
+    }
+
+    fun cacheFoodchallengeplace (
+        title: String, restaurant: String,
+        difficulty: String) //, challengePicker: Array<Int>)
+    {
+        foodchallengeplace.title = title
+        foodchallengeplace.restaurant = restaurant
+        foodchallengeplace.difficulty = difficulty
+        // foodchallengeplace.challengePicker = challengePicker
     }
 
     private fun registerImagePickerCallback() {
@@ -181,18 +200,6 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
             }
     }
 
-    private fun setupChallengePicker() {
-        val challengePicker = binding.challengePicker
-        val values = arrayOf("Spicy", "BIG", "Speed")
-        challengePicker.minValue = 0
-        challengePicker.maxValue = values.size - 1
-        challengePicker.displayedValues = values
-        challengePicker.wrapSelectorWheel = true
-        challengePicker.setOnValueChangedListener { _, oldVal, newVal ->
-            val text = "Changed from " + values[oldVal] + " to " + values[newVal]
-            //Toast.makeText(this@FoodchallengePlacePresenter, text, Toast.LENGTH_SHORT).show()
-        }
-    }
     private fun doPermissionLauncher() {
         i("permission check called")
         requestPermissionLauncher =
@@ -205,4 +212,17 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
                 }
             }
     }
-}
+//
+//    private fun setupChallengePicker() {
+//        val challengePicker = binding.challengePicker
+//        val values = arrayOf("Spicy", "BIG", "Speed")
+//        challengePicker.minValue = 0
+//        challengePicker.maxValue = values.size - 1
+//        challengePicker.displayedValues = values
+//        challengePicker.wrapSelectorWheel = true
+//        challengePicker.setOnValueChangedListener { _, oldVal, newVal ->
+//            val text = "Changed from " + values[oldVal] + " to " + values[newVal]
+//            //Toast.makeText(this@FoodchallengePlacePresenter, text, Toast.LENGTH_SHORT).show()
+//        }
+//    }
+    }

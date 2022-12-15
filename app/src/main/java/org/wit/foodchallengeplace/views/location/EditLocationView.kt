@@ -39,7 +39,9 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback,
     }
 
     override fun onMarkerDragEnd(marker: Marker) {
-        presenter.doUpdateLocation(marker.position.latitude,marker.position.longitude, map.cameraPosition.zoom)
+        presenter.doUpdateLocation(
+            marker.position.latitude, marker.position.longitude,
+            map.cameraPosition.zoom)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
@@ -47,7 +49,6 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback,
         return false
     }
 
-    @Deprecated("Deprecated in Java", ReplaceWith("presenter.doOnBackPressed()"))
     override fun onBackPressed() {
         presenter.doOnBackPressed()
 

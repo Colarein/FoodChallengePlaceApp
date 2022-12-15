@@ -1,6 +1,5 @@
 package org.wit.foodchallengeplace.views.foodchallengeplace
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -11,7 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengesplaceBinding
-import org.wit.foodchallengeplace.main.MainApp
+// import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import timber.log.Timber.i
 
@@ -19,7 +18,7 @@ class FoodchallengePlaceView : AppCompatActivity() {
 
     private lateinit var binding: ActivityFoodchallengesplaceBinding
     private lateinit var presenter: FoodchallengePlacePresenter
-    lateinit var app: MainApp
+    // lateinit var app: MainApp
     lateinit var map: GoogleMap
     var foodchallengeplace = FoodchallengePlaceModel()
 
@@ -40,15 +39,17 @@ class FoodchallengePlaceView : AppCompatActivity() {
             presenter.doSelectImage()
         }
 
-        binding.foodchallengeplaceLocation.setOnClickListener {
+        binding.mapView2.setOnClickListener {
             presenter.cacheFoodchallengeplace(binding.foodchallengeplaceTitle.text.toString(), binding.restaurant.text.toString(), binding.difficulty.text.toString())
                 // arrayOf(binding.challengePicker.value))
             presenter.doSetLocation()
         }
         binding.mapView2.onCreate(savedInstanceState)
+
         binding.mapView2.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
+            it.setOnMapClickListener { presenter.doSetLocation() }
         }
     }
 
@@ -83,7 +84,6 @@ class FoodchallengePlaceView : AppCompatActivity() {
 //            R.id.item_cancel -> {
 //                presenter.doCancel()
 //            }
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -92,28 +92,21 @@ class FoodchallengePlaceView : AppCompatActivity() {
         binding.foodchallengeplaceTitle.setText(foodchallengeplace.title)
         binding.restaurant.setText(foodchallengeplace.restaurant)
         binding.difficulty.setText(foodchallengeplace.difficulty)
-        arrayOf(binding.challengePicker.value)
+        // arrayOf(binding.challengePicker.value)
 
         Picasso.get()
             .load(foodchallengeplace.image)
             .into(binding.foodchallengeplaceImage)
         if (foodchallengeplace.image != Uri.EMPTY) {
             binding.chooseImage.setText(R.string.change_foodchallengeplace_image)
-
         }
+        binding.lat.setText("%.6f".format(foodchallengeplace.lat))
+        binding.lng.setText("%.6f".format(foodchallengeplace.lng))
     }
-//
-//    @Deprecated("Deprecated in Java")
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (data != null) {
-//            presenter.doActivityResult(requestCode, resultCode, data)
-//        }
-//    }
 
-//    override fun onBackPressed() {
-//        presenter.doCancel()
-//    }
+    override fun onBackPressed() {
+        presenter.doCancel()
+    }
 
     fun updateImage(image: Uri){
         i("Image updated")
@@ -140,6 +133,7 @@ class FoodchallengePlaceView : AppCompatActivity() {
         override fun onResume() {
             super.onResume()
             binding.mapView2.onResume()
+            presenter.doRestartLocationUpdates()
         }
 
         override fun onSaveInstanceState(outState: Bundle) {
