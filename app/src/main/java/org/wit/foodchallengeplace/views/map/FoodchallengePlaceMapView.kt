@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengeplaceMapsBinding
 import org.wit.foodchallengeplace.databinding.ContentFoodchallengePlaceMapsBinding
 import org.wit.foodchallengeplace.main.MainApp
@@ -29,8 +32,9 @@ class FoodchallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickL
         contentBinding = ContentFoodchallengePlaceMapsBinding.bind(binding.root)
 
         contentBinding.mapView.onCreate(savedInstanceState)
-        contentBinding.mapView.getMapAsync{
+        contentBinding.mapView.getMapAsync{ GlobalScope.launch(Dispatchers.Main) {
             presenter.doPopulateMap(it)
+        }
         }
     }
     fun showFoodchallengeplaces(foodchallengeplace: FoodchallengePlaceModel) {
@@ -45,7 +49,9 @@ class FoodchallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickL
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        presenter.doMarkerSelected(marker)
+        GlobalScope.launch(Dispatchers.Main) {
+            presenter.doMarkerSelected(marker)
+        }
         return true
     }
 

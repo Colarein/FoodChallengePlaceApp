@@ -29,19 +29,19 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
         }
     }
 
-    override fun findAll(): MutableList<FoodchallengePlaceModel> {
+    override suspend fun findAll(): MutableList<FoodchallengePlaceModel> {
         logAll()
         return foodchallengeplaces
     }
 
-    override fun create(foodchallengeplace: FoodchallengePlaceModel) {
+    override suspend fun create(foodchallengeplace: FoodchallengePlaceModel) {
         foodchallengeplace.id = generateRandomId()
         foodchallengeplaces.add(foodchallengeplace)
         serialize()
     }
 
 
-    override fun update(foodchallengeplace: FoodchallengePlaceModel) {
+    override suspend fun update(foodchallengeplace: FoodchallengePlaceModel) {
         val foodchallengeplacesList = findAll() as ArrayList<FoodchallengePlaceModel>
         var foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplacesList.find { p -> p.id == foodchallengeplace.id }
         if (foundFoodchallengeplace != null) {
@@ -57,7 +57,7 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
         serialize()
     }
 
-    override fun delete(foodchallengeplace: FoodchallengePlaceModel) {
+    override suspend fun delete(foodchallengeplace: FoodchallengePlaceModel) {
         val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.id == foodchallengeplace.id }
         foodchallengeplaces.remove(foundFoodchallengeplace)
         serialize()
@@ -68,7 +68,7 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
 //        serialize()
 //    }
 
-    override fun findById(id:Long) : FoodchallengePlaceModel? {
+    override suspend fun findById(id:Long) : FoodchallengePlaceModel? {
         val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.id == id }
         return foundFoodchallengeplace
     }

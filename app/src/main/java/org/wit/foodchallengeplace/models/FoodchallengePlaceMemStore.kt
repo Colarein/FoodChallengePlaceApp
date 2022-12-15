@@ -12,17 +12,17 @@ class FoodchallengePlaceMemStore : FoodchallengePlaceStore {
 
     val foodchallengeplaces = ArrayList<FoodchallengePlaceModel>()
 
-    override fun findAll(): List<FoodchallengePlaceModel> {
+    override suspend fun findAll(): List<FoodchallengePlaceModel> {
         return foodchallengeplaces
     }
 
-    override fun create(foodchallengeplace: FoodchallengePlaceModel) {
+    override suspend fun create(foodchallengeplace: FoodchallengePlaceModel) {
         foodchallengeplace.id = getId()
         foodchallengeplaces.add(foodchallengeplace)
         logAll()
     }
 
-    override fun update(foodchallengeplace: FoodchallengePlaceModel) {
+    override suspend fun update(foodchallengeplace: FoodchallengePlaceModel) {
         var foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { p -> p.id == foodchallengeplace.id }
         if (foundFoodchallengeplace != null) {
             foundFoodchallengeplace.title = foodchallengeplace.title
@@ -38,7 +38,7 @@ class FoodchallengePlaceMemStore : FoodchallengePlaceStore {
     }
 
 
-    override fun delete(foodchallengeplace: FoodchallengePlaceModel) {
+    override suspend fun delete(foodchallengeplace: FoodchallengePlaceModel) {
         foodchallengeplaces.remove(foodchallengeplace)
     }
 
@@ -46,7 +46,7 @@ class FoodchallengePlaceMemStore : FoodchallengePlaceStore {
 //        foodchallengeplaces.removeAll(foodchallengeplaces)
 //    }
 
-    override fun findById(id:Long) : FoodchallengePlaceModel? {
+    override suspend fun findById(id:Long) : FoodchallengePlaceModel? {
         val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.id == id }
         return foundFoodchallengeplace
     }

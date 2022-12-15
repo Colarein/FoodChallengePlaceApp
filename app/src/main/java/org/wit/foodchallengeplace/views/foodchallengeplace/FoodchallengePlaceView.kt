@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.databinding.ActivityFoodchallengesplaceBinding
 // import org.wit.foodchallengeplace.main.MainApp
@@ -73,13 +76,19 @@ class FoodchallengePlaceView : AppCompatActivity() {
                     Snackbar.make(binding.root, R.string.enter_foodchallengeplace_title, Snackbar.LENGTH_LONG)
                         .show()
                 } else {
-                    presenter.doAddOrSave(binding.foodchallengeplaceTitle.text.toString(),
-                        binding.restaurant.text.toString(), binding.difficulty.text.toString())
-                    //arrayOf(binding.challengePicker.value))
+                    GlobalScope.launch(Dispatchers.IO) {
+                        presenter.doAddOrSave(
+                            binding.foodchallengeplaceTitle.text.toString(),
+                            binding.restaurant.text.toString(), binding.difficulty.text.toString()
+                        )
+                        //arrayOf(binding.challengePicker.value))
+                    }
                 }
             }
             R.id.item_delete -> {
-                presenter.doDelete()
+                GlobalScope.launch(Dispatchers.IO) {
+                    presenter.doDelete()
+                }
             }
 //            R.id.item_cancel -> {
 //                presenter.doCancel()

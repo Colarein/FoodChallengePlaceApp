@@ -36,7 +36,7 @@ class FoodchallengePlaceAdapter constructor(private var foodchallengeplaces: Lis
             binding.restaurant.text = foodchallengeplace.restaurant
             binding.difficulty.text = foodchallengeplace.difficulty
             // binding.challengePicker.text = foodchallengeplace.challengePicker.toString()
-            Picasso.get().load(foodchallengeplace.image).resize(100,100).into(binding.imageIcon)
+            Picasso.get().load(foodchallengeplace.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onFoodchallengeplaceClick(foodchallengeplace) }
         }
     }

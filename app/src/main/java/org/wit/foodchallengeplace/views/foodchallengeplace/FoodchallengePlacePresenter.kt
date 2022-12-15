@@ -63,7 +63,7 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
         }
     }
 
-    fun doAddOrSave(
+    suspend fun doAddOrSave(
         title: String, restaurant: String,
         difficulty: String) // challengePicker: Array<Int>)
 
@@ -84,15 +84,13 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
         view.finish()
     }
 
-    fun doDelete() {
+    suspend fun doDelete() {
         app.foodchallengeplaces.delete(foodchallengeplace)
         view.finish()
     }
 
     fun doSelectImage() {
-        // view.let {
             showImagePicker(imageIntentLauncher)
-        // }
     }
 
     fun doSetLocation() {

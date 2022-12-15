@@ -5,6 +5,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.foodchallengeplace.R
 import org.wit.foodchallengeplace.views.foodchallengeplacelist.FoodchallengePlaceAdapter
 import org.wit.foodchallengeplace.views.foodchallengeplacelist.FoodchallengePlaceListener
@@ -24,20 +27,11 @@ class FoodchallengePlaceListView : AppCompatActivity(), FoodchallengePlaceListen
         setContentView(binding.root)
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
-
         presenter = FoodchallengePlaceListPresenter(this)
-
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter =
-            FoodchallengePlaceAdapter(presenter.getFoodchallengeplaces(), this)
-
+        updateRecyclerView()
     }
-
-//    fun showFoodchallengeplaces(foodchallengeplaces: List<FoodchallengePlaceModel>) {
-//        binding.recyclerView.adapter = FoodchallengePlaceAdapter(foodchallengeplaces, this)
-//        binding.recyclerView.adapter?.notifyDataSetChanged()
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -45,10 +39,13 @@ class FoodchallengePlaceListView : AppCompatActivity(), FoodchallengePlaceListen
     }
 
     override fun onResume() {
+
         //update the view
+        super.onResume()
+        updateRecyclerView()
         binding.recyclerView.adapter?.notifyDataSetChanged()
         i("recyclerView onResume")
-        super.onResume()
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -64,14 +61,11 @@ class FoodchallengePlaceListView : AppCompatActivity(), FoodchallengePlaceListen
 
     }
 
-//    @SuppressLint("NotifyDataSetChanged")
-//    private fun loadFoodchallengeplaces() {
-//        binding.recyclerView.adapter = FoodchallengePlaceAdapter(presenter.getFoodchallengeplaces(), this)
-//        binding.recyclerView.adapter?.notifyDataSetChanged()
-//    }
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        presenter.loadFoodchallengeplaces()
-//        super.onActivityResult(requestCode, resultCode, data)
-//    }
+    private fun updateRecyclerView(){
+        GlobalScope.launch(Dispatchers.Main){
+            binding.recyclerView.adapter =
+                FoodchallengePlaceAdapter(presenter.loadFoodchallengeplaces(),
+                    this@FoodchallengePlaceListView)
+        }
+    }
 }

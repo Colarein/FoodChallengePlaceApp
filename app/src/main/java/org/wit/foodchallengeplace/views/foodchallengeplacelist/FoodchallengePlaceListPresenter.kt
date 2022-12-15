@@ -3,6 +3,9 @@ package org.wit.foodchallengeplace.views.foodchallengeplacelist
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import org.wit.foodchallengeplace.views.foodchallengeplace.FoodchallengePlaceView
@@ -10,18 +13,17 @@ import org.wit.foodchallengeplace.views.map.FoodchallengePlaceMapView
 import timber.log.Timber
 
 class FoodchallengePlaceListPresenter(val view: FoodchallengePlaceListView) {
+
     var app: MainApp = view.application as MainApp
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var editIntentLauncher: ActivityResultLauncher<Intent>
-    // private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
 
     init {
         registerEditCallback()
-        // registerMapCallback()
         registerRefreshCallback()
     }
 
-    fun getFoodchallengeplaces() = app.foodchallengeplaces.findAll()
+    suspend fun loadFoodchallengeplaces() = app.foodchallengeplaces.findAll()
 
     fun doAddFoodchallengeplace() {
         val launcherIntent = Intent(view, FoodchallengePlaceView::class.java)
@@ -41,22 +43,22 @@ class FoodchallengePlaceListPresenter(val view: FoodchallengePlaceListView) {
 
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
-            view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { getFoodchallengeplaces() }
+            view.registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult())
+            {
+                GlobalScope.launch(Dispatchers.Main){
+                    loadFoodchallengeplaces()
+                }
+            }
     }
 
     private fun registerEditCallback() {
         editIntentLauncher =
-            view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            view.registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult())
             { }
 
     }
-
-//    private fun registerMapCallback() {
-//        mapIntentLauncher =
-//            view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-//            { }
-//    }
 
 //    private fun registerImagePickerCallback() {
 //        imageIntentLauncher =

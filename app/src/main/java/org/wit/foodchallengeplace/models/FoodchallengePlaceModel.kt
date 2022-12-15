@@ -2,11 +2,15 @@ package org.wit.foodchallengeplace.models
 
 import android.net.Uri
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.firebase.database.snapshot.Index
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class FoodchallengePlaceModel(
+@Entity
+data class FoodchallengePlaceModel(@PrimaryKey(autoGenerate = true)
+
     var id: Long = 0,
     var title: String = "",
     var restaurant: String = "",
