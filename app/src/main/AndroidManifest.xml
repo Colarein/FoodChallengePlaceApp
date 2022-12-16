@@ -14,14 +14,6 @@
         android:roundIcon="@drawable/ic_baseline_fastfood_24"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodchallengePlace">
-        <activity
-            android:name=".activities.RegisterActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".activities.ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
 
         <activity
             android:name=".activities.SplashScreenActivity"
@@ -36,6 +28,15 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
+
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".views.login.LoginView"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
 
         <activity
             android:name=".views.map.FoodchallengePlaceMapView"
