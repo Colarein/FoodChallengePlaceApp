@@ -16,14 +16,14 @@
 
         <ImageView
             android:id="@+id/imageIcon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="126dp"
+            android:layout_height="102dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/change_foodchallengeplace_image"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/foodchallengeplaceTitle"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.048"
-            app:layout_constraintStart_toEndOf="@+id/imageIcon"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="A Title" />
 
@@ -47,21 +47,9 @@
             android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.052"
-            app:layout_constraintStart_toEndOf="@+id/imageIcon"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/foodchallengeplaceTitle"
             tools:text="A Restaurant" />
-
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textAlignment="viewStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.052"
-            app:layout_constraintStart_toEndOf="@+id/imageIcon"
-            app:layout_constraintTop_toBottomOf="@id/restaurant"
-            tools:text="An Address" />
 
         <TextView
             android:id="@+id/difficulty"
@@ -71,8 +59,8 @@
             android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.052"
-            app:layout_constraintStart_toEndOf="@+id/imageIcon"
-            app:layout_constraintTop_toBottomOf="@id/address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/restaurant"
             tools:text="The Difficulty" />
 
         <TextView
@@ -83,7 +71,7 @@
             android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.052"
-            app:layout_constraintStart_toEndOf="@+id/imageIcon"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/difficulty"
             tools:text="The Challenge Type" />
 
