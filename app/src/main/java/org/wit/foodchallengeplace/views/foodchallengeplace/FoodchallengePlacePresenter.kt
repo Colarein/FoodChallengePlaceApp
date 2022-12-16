@@ -58,8 +58,8 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
             if (checkLocationPermissions(view)) {
                 doSetCurrentLocation()
             }
-            foodchallengeplace.lat = location.lat
-            foodchallengeplace.lng = location.lng
+            foodchallengeplace.location.lat = location.lat
+            foodchallengeplace.location.lng = location.lng
         }
     }
 
@@ -94,11 +94,11 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
     }
 
     fun doSetLocation() {
-        if (foodchallengeplace.zoom != 0f) {
-            location.lat = foodchallengeplace.lat
-            location.lng = foodchallengeplace.lng
-            location.zoom = foodchallengeplace.zoom
-            locationUpdate(foodchallengeplace.lat, foodchallengeplace.lng)
+        if (foodchallengeplace.location.zoom != 0f) {
+            location.lat = foodchallengeplace.location.lat
+            location.lng = foodchallengeplace.location.lng
+            location.zoom = foodchallengeplace.location.zoom
+            locationUpdate(foodchallengeplace.location.lat, foodchallengeplace.location.lng)
         }
         val launcherIntent = Intent(view, EditLocationView::class.java)
             .putExtra("location", location)
@@ -130,18 +130,16 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
 
     fun doConfigureMap(m: GoogleMap) {
         map = m
-        locationUpdate(foodchallengeplace.lat, foodchallengeplace.lng)
+        locationUpdate(foodchallengeplace.location.lat, foodchallengeplace.location.lng)
     }
 
     fun locationUpdate(lat: Double, lng: Double) {
-        foodchallengeplace.lat = lat
-        foodchallengeplace.lng = lng
-        foodchallengeplace.zoom = 15f
+        foodchallengeplace.location = location
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
-        val options = MarkerOptions().title(foodchallengeplace.title).position(LatLng(foodchallengeplace.lat, foodchallengeplace.lng))
+        val options = MarkerOptions().title(foodchallengeplace.title).position(LatLng(foodchallengeplace.location.lat, foodchallengeplace.location.lng))
         map?.addMarker(options)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(foodchallengeplace.lat, foodchallengeplace.lng), foodchallengeplace.zoom))
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(foodchallengeplace.location.lat, foodchallengeplace.location.lng), foodchallengeplace.location.zoom))
         view.showFoodchallengeplace(foodchallengeplace)
     }
 
@@ -186,9 +184,7 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
                             val location =
                                 result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
-                            foodchallengeplace.lat = location.lat
-                            foodchallengeplace.lng = location.lng
-                            foodchallengeplace.zoom = location.zoom
+                            foodchallengeplace.location = location
                         }
                     }
                     AppCompatActivity.RESULT_CANCELED -> {}

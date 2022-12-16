@@ -50,9 +50,7 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
             foundFoodchallengeplace.difficulty = foodchallengeplace.difficulty
             // foundFoodchallengeplace.challengePicker = foodchallengeplace.challengePicker
             foundFoodchallengeplace.image = foodchallengeplace.image
-            foundFoodchallengeplace.lat = foodchallengeplace.lat
-            foundFoodchallengeplace.lng = foodchallengeplace.lng
-            foundFoodchallengeplace.zoom = foodchallengeplace.zoom
+            foundFoodchallengeplace.location = foodchallengeplace.location
         }
         serialize()
     }

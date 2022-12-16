@@ -90,9 +90,9 @@ class FoodchallengePlaceView : AppCompatActivity() {
                     presenter.doDelete()
                 }
             }
-//            R.id.item_cancel -> {
-//                presenter.doCancel()
-//            }
+            R.id.item_cancel -> {
+                presenter.doCancel()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -110,12 +110,8 @@ class FoodchallengePlaceView : AppCompatActivity() {
         if (foodchallengeplace.image != Uri.EMPTY) {
             binding.chooseImage.setText(R.string.change_foodchallengeplace_image)
         }
-        binding.lat.setText("%.6f".format(foodchallengeplace.lat))
-        binding.lng.setText("%.6f".format(foodchallengeplace.lng))
-    }
-
-    override fun onBackPressed() {
-        presenter.doCancel()
+        binding.lat.setText("%.6f".format(foodchallengeplace.location.lat))
+        binding.lng.setText("%.6f".format(foodchallengeplace.location.lng))
     }
 
     fun updateImage(image: Uri){

@@ -42,7 +42,6 @@ class FoodchallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickL
         contentBinding.currentRestaurant.text = foodchallengeplace.restaurant
         contentBinding.currentDifficulty.text = foodchallengeplace.difficulty
         // contentBinding.currentChallengePicker.text = foodchallengeplace.challengePicker.toString()
-
         Picasso.get()
             .load(foodchallengeplace.image)
             .into(contentBinding.foodchallengeplaceImage)
