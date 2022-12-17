@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import org.wit.foodchallengeplace.views.foodchallengeplace.FoodchallengePlaceView
+import org.wit.foodchallengeplace.views.login.LoginView
 import org.wit.foodchallengeplace.views.map.FoodchallengePlaceMapView
 import timber.log.Timber
 
@@ -58,6 +59,11 @@ class FoodchallengePlaceListPresenter(val view: FoodchallengePlaceListView) {
                 ActivityResultContracts.StartActivityForResult())
             { }
 
+    }
+
+    fun doLogout(){
+        val launcherIntent = Intent(view, LoginView::class.java)
+        editIntentLauncher.launch(launcherIntent)
     }
 
 //    private fun registerImagePickerCallback() {

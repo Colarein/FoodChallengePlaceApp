@@ -5,9 +5,11 @@
     <string name="hint_restaurant">Restaurant </string>
     <string name="hint_address">Address </string>
     <string name="hint_difficulty">Difficulty </string>
-    <!--    Menu Strings-->
+    <!--  Main  Menu Strings-->
     <string name="menu_addFoodchallengeplace">Add</string>
     <string name="menu_mapMode">Map Mode</string>
+    <string name="menu_logout">Logout</string>
+    <!--    Foodchallenge Place Menu Strings-->
     <string name="menu_saveFoodchallengeplace">Save</string>
     <string name="menu_deleteFoodchallengeplace">Delete</string>
     <string name="menu_deleteAllFoodchallengeplace">Delete All</string>

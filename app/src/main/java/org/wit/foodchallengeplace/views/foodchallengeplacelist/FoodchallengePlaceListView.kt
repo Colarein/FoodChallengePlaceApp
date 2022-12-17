@@ -52,6 +52,7 @@ class FoodchallengePlaceListView : AppCompatActivity(), FoodchallengePlaceListen
         when (item.itemId) {
             R.id.item_add -> { presenter.doAddFoodchallengeplace() }
             R.id.item_map -> { presenter.doShowFoodchallengeplacesMap() }
+            R.id.item_logout -> { presenter.doLogout() }
         }
         return super.onOptionsItemSelected(item)
     }
