@@ -18,7 +18,7 @@ class FoodchallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickL
     private lateinit var binding: ActivityFoodchallengeplaceMapsBinding
     private lateinit var contentBinding: ContentFoodchallengePlaceMapsBinding
     lateinit var app: MainApp
-    lateinit var presenter: FoodchallengePlaceMapPresenter
+    lateinit var presenter: PlacemarkMapPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,31 +27,31 @@ class FoodchallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickL
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        presenter = FoodchallengePlaceMapPresenter(this)
+        presenter = PlacemarkMapPresenter(this)
 
         contentBinding = ContentFoodchallengePlaceMapsBinding.bind(binding.root)
 
         contentBinding.mapView.onCreate(savedInstanceState)
-        contentBinding.mapView.getMapAsync{ GlobalScope.launch(Dispatchers.Main) {
-            presenter.doPopulateMap(it)
-        }
+        contentBinding.mapView.getMapAsync{
+            GlobalScope.launch(Dispatchers.Main) {
+                presenter.doPopulateMap(it)
+            }
         }
     }
-    fun showFoodchallengeplaces(foodchallengeplace: FoodchallengePlaceModel) {
-        contentBinding.currentTitle.text = foodchallengeplace.title
-        contentBinding.currentRestaurant.text = foodchallengeplace.restaurant
-        contentBinding.currentDifficulty.text = foodchallengeplace.difficulty
-        // contentBinding.currentChallengePicker.text = foodchallengeplace.challengePicker.toString()
-        Picasso.get()
-            .load(foodchallengeplace.image)
-            .into(contentBinding.foodchallengeplaceImage)
-    }
-
     override fun onMarkerClick(marker: Marker): Boolean {
         GlobalScope.launch(Dispatchers.Main) {
             presenter.doMarkerSelected(marker)
         }
         return true
+    }
+    fun showFoodchallengeplace(foodchallengeplace: FoodchallengePlaceModel) {
+        contentBinding.currentTitle.text = foodchallengeplace.title
+        contentBinding.currentRestaurant.text = foodchallengeplace.restaurant
+        contentBinding.currentDifficulty.text = foodchallengeplace.difficulty
+//        contentBinding.currentChallengePicker.text = foodchallengeplace.challengePicker
+        Picasso.get()
+            .load(foodchallengeplace.image)
+            .into(contentBinding.foodchallengeplaceImage)
     }
 
     override fun onDestroy() {
@@ -78,5 +78,6 @@ class FoodchallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickL
         super.onSaveInstanceState(outState)
         contentBinding.mapView.onSaveInstanceState(outState)
     }
+
 
 }

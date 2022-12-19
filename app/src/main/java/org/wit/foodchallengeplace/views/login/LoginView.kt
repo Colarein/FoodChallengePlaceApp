@@ -20,7 +20,7 @@ class LoginView : AppCompatActivity(){
         binding.progressBar!!.visibility = View.GONE
 
         binding.signUp!!.setOnClickListener {
-            val email = binding.email?.text.toString()
+            val email = binding.email!!.text.toString()
             val password = binding.password.text.toString()
             if (email == "" || password == "") {
                 showSnackBar("please provide email and password")
@@ -31,7 +31,7 @@ class LoginView : AppCompatActivity(){
         }
 
         binding.logIn!!.setOnClickListener {
-            val email = binding.email?.text.toString()
+            val email = binding.email!!.text.toString()
             val password = binding.password.text.toString()
             if (email == "" || password == "") {
                 showSnackBar("please provide email and password")
@@ -45,6 +45,7 @@ class LoginView : AppCompatActivity(){
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG)
             .show()
     }
+
     fun showProgress() {
         binding.progressBar!!.visibility = View.VISIBLE
     }
@@ -52,4 +53,6 @@ class LoginView : AppCompatActivity(){
     fun hideProgress() {
         binding.progressBar!!.visibility = View.GONE
     }
+
+
 }

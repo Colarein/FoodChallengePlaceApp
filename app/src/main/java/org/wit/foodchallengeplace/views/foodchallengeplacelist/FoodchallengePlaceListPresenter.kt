@@ -3,28 +3,28 @@ package org.wit.foodchallengeplace.views.foodchallengeplacelist
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
-import org.wit.foodchallengeplace.views.foodchallengeplace.FoodchallengePlaceView
 import org.wit.foodchallengeplace.views.login.LoginView
+import org.wit.foodchallengeplace.views.foodchallengeplace.FoodchallengePlaceView
 import org.wit.foodchallengeplace.views.map.FoodchallengePlaceMapView
-import timber.log.Timber
 
-class FoodchallengePlaceListPresenter(val view: FoodchallengePlaceListView) {
+class FoodchallengePlaceListPresenter(private val view: FoodchallengePlaceListView) {
 
     var app: MainApp = view.application as MainApp
-    private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
-    private lateinit var editIntentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var editIntentLauncher : ActivityResultLauncher<Intent>
 
     init {
         registerEditCallback()
         registerRefreshCallback()
     }
 
-    suspend fun loadFoodchallengeplaces() = app.foodchallengeplaces.findAll()
+    suspend fun getFoodchallengeplaces() = app.foodchallengeplaces.findAll()
 
     fun doAddFoodchallengeplace() {
         val launcherIntent = Intent(view, FoodchallengePlaceView::class.java)
@@ -33,7 +33,7 @@ class FoodchallengePlaceListPresenter(val view: FoodchallengePlaceListView) {
 
     fun doEditFoodchallengeplace(foodchallengeplace: FoodchallengePlaceModel) {
         val launcherIntent = Intent(view, FoodchallengePlaceView::class.java)
-        launcherIntent.putExtra("Foodchallengeplace_edit", foodchallengeplace)
+        launcherIntent.putExtra("foodchallengeplace_edit", foodchallengeplace)
         editIntentLauncher.launch(launcherIntent)
     }
 
@@ -42,45 +42,26 @@ class FoodchallengePlaceListPresenter(val view: FoodchallengePlaceListView) {
         editIntentLauncher.launch(launcherIntent)
     }
 
-    private fun registerRefreshCallback() {
-        refreshIntentLauncher =
-            view.registerForActivityResult(
-                ActivityResultContracts.StartActivityForResult())
-            {
-                GlobalScope.launch(Dispatchers.Main){
-                    loadFoodchallengeplaces()
-                }
-            }
-    }
-
-    private fun registerEditCallback() {
-        editIntentLauncher =
-            view.registerForActivityResult(
-                ActivityResultContracts.StartActivityForResult())
-            { }
-
-    }
-
-    fun doLogout(){
+    suspend fun doLogout(){
+        FirebaseAuth.getInstance().signOut()
+        app.foodchallengeplaces.clear()
         val launcherIntent = Intent(view, LoginView::class.java)
         editIntentLauncher.launch(launcherIntent)
     }
 
-//    private fun registerImagePickerCallback() {
-//        imageIntentLauncher =
-//            view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-//            { result ->
-//                when (result.resultCode) {
-//                    AppCompatActivity.RESULT_OK -> {
-//                        if (result.data != null) {
-//                            Timber.i("Got Result ${result.data!!.data}")
-//                            foodchallengeplace.image = result.data!!.data!!
-//                            view.updateImage(foodchallengeplace.image)
-//                        }
-//                    }
-//                    AppCompatActivity.RESULT_CANCELED -> {}
-//                    else -> {}
-//                }
-//            }
-//    }
+    private fun registerRefreshCallback() {
+        refreshIntentLauncher =
+            view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            {
+                GlobalScope.launch(Dispatchers.Main){
+                    getFoodchallengeplaces()
+                }
+            }
+    }
+    private fun registerEditCallback() {
+        editIntentLauncher =
+            view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            {  }
+
+    }
 }

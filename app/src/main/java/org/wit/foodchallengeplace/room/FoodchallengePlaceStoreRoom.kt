@@ -36,6 +36,6 @@ class FoodchallengePlaceStoreRoom( val context: Context) : FoodchallengePlaceSto
         dao.deleteFoodchallengeplace(foodchallengeplace)
     }
 
-    fun clear() {
+    override suspend fun clear(){
     }
 }

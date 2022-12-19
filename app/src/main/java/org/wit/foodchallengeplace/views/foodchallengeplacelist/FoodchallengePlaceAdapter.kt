@@ -12,12 +12,13 @@ interface FoodchallengePlaceListener {
 }
 
 class FoodchallengePlaceAdapter constructor(private var foodchallengeplaces: List<FoodchallengePlaceModel>,
-                                            private val listener: FoodchallengePlaceListener) :
+                                   private val listener: FoodchallengePlaceListener) :
     RecyclerView.Adapter<FoodchallengePlaceAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardFoodchallengeplaceBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
+
         return MainHolder(binding)
     }
 
@@ -36,7 +37,12 @@ class FoodchallengePlaceAdapter constructor(private var foodchallengeplaces: Lis
             binding.restaurant.text = foodchallengeplace.restaurant
             binding.difficulty.text = foodchallengeplace.difficulty
             // binding.challengePicker.text = foodchallengeplace.challengePicker.toString()
-            Picasso.get().load(foodchallengeplace.image).resize(200,200).into(binding.imageIcon)
+            if (foodchallengeplace.image != ""){
+                Picasso.get()
+                    .load(foodchallengeplace.image)
+                    .resize(200, 200)
+                    .into(binding.imageIcon)
+            }
             binding.root.setOnClickListener { listener.onFoodchallengeplaceClick(foodchallengeplace) }
         }
     }

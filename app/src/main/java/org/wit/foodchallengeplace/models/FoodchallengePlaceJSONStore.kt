@@ -56,15 +56,10 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
     }
 
     override suspend fun delete(foodchallengeplace: FoodchallengePlaceModel) {
-        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.id == foodchallengeplace.id }
+        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find{ it.id == foodchallengeplace.id }
         foodchallengeplaces.remove(foundFoodchallengeplace)
         serialize()
     }
-
-//    override fun deleteAll(foodchallengeplace: FoodchallengePlaceModel) {
-//        foodchallengeplaces.removeAll(foodchallengeplaces)
-//        serialize()
-//    }
 
     override suspend fun findById(id:Long) : FoodchallengePlaceModel? {
         val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.id == id }
@@ -83,6 +78,10 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
 
     private fun logAll() {
         foodchallengeplaces.forEach { Timber.i("$it") }
+    }
+
+    override suspend fun clear(){
+        foodchallengeplaces.clear()
     }
 }
 

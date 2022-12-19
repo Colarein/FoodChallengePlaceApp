@@ -52,4 +52,8 @@ class FoodchallengePlaceMemStore : FoodchallengePlaceStore {
     fun logAll() {
         foodchallengeplaces.forEach{ i("${it}") }
     }
+
+    override suspend fun clear(){
+        foodchallengeplaces.clear()
+    }
 }

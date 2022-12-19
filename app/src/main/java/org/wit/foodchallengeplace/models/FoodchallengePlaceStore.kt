@@ -6,4 +6,5 @@ interface FoodchallengePlaceStore {
     suspend fun create(foodchallengeplace: FoodchallengePlaceModel)
     suspend fun update (foodchallengeplace: FoodchallengePlaceModel)
     suspend fun delete (foodchallengeplace: FoodchallengePlaceModel)
+    suspend fun clear()
 }

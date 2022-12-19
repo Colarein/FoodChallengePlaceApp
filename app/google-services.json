@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "644597296255",
+    "firebase_url": "https://foodchallenge-app-default-rtdb.firebaseio.com",
     "project_id": "foodchallenge-app",
     "storage_bucket": "foodchallenge-app.appspot.com"
   },
