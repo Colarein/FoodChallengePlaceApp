@@ -20,13 +20,13 @@ class FoodchallengePlaceMapPresenter(val view: FoodchallengePlaceMapView) {
         app.foodchallengeplaces.findAll().forEach {
             val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.title).position(loc)
-            map.addMarker(options)?.tag = it.id
+            map.addMarker(options)?.tag = it.fbId
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
         }
     }
 
     suspend fun doMarkerSelected(marker: Marker) {
-        val tag = marker.tag as Long
+        val tag = marker.tag as String
         val foodchallengeplace = app.foodchallengeplaces.findById(tag)
         if (foodchallengeplace != null) view.showFoodchallengeplace(foodchallengeplace)
     }

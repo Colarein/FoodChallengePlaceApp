@@ -46,8 +46,8 @@ class FoodchallengePlaceMemStore : FoodchallengePlaceStore {
 //        foodchallengeplaces.removeAll(foodchallengeplaces)
 //    }
 
-    override suspend fun findById(id:Long) : FoodchallengePlaceModel? {
-        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.id == id }
+    override suspend fun findById(fbId: String) : FoodchallengePlaceModel? {
+        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.fbId == fbId }
         return foundFoodchallengeplace
     }
 

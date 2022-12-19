@@ -15,8 +15,8 @@ val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .create()
 val listType: Type = object : TypeToken<ArrayList<FoodchallengePlaceModel>>() {}.type
 
-fun generateRandomId(): Long {
-    return Random().nextLong()
+fun generateRandomId(): String {
+    return Random().nextLong().toString()
 }
 
 class FoodchallengePlaceJSONStore (private val context: Context) : FoodchallengePlaceStore {
@@ -35,7 +35,7 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
     }
 
     override suspend fun create(foodchallengeplace: FoodchallengePlaceModel) {
-        foodchallengeplace.id = generateRandomId()
+        foodchallengeplace.fbId = generateRandomId()
         foodchallengeplaces.add(foodchallengeplace)
         serialize()
     }
@@ -43,7 +43,7 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
 
     override suspend fun update(foodchallengeplace: FoodchallengePlaceModel) {
         val foodchallengeplacesList = findAll() as ArrayList<FoodchallengePlaceModel>
-        var foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplacesList.find { p -> p.id == foodchallengeplace.id }
+        var foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplacesList.find { p -> p.fbId == foodchallengeplace.fbId }
         if (foundFoodchallengeplace != null) {
             foundFoodchallengeplace.title = foodchallengeplace.title
             foundFoodchallengeplace.restaurant = foodchallengeplace.restaurant
@@ -58,13 +58,13 @@ class FoodchallengePlaceJSONStore (private val context: Context) : Foodchallenge
     }
 
     override suspend fun delete(foodchallengeplace: FoodchallengePlaceModel) {
-        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find{ it.id == foodchallengeplace.id }
+        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find{ it.fbId == foodchallengeplace.fbId }
         foodchallengeplaces.remove(foundFoodchallengeplace)
         serialize()
     }
 
-    override suspend fun findById(id:Long) : FoodchallengePlaceModel? {
-        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.id == id }
+    override suspend fun findById(fbId: String) : FoodchallengePlaceModel? {
+        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { it.fbId == fbId }
         return foundFoodchallengeplace
     }
 

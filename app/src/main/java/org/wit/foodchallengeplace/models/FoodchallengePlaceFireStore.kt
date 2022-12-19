@@ -22,8 +22,8 @@ class FoodchallengePlaceFireStore(val context: Context) : FoodchallengePlaceStor
     }
 
 
-    override suspend fun findById(id: Long): FoodchallengePlaceModel? {
-        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { p -> p.id == id }
+    override suspend fun findById(fbId: String): FoodchallengePlaceModel? {
+        val foundFoodchallengeplace: FoodchallengePlaceModel? = foodchallengeplaces.find { p -> p.fbId == fbId }
         return foundFoodchallengeplace
     }
 

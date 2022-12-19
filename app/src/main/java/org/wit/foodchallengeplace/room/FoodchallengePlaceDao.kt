@@ -12,8 +12,8 @@ interface FoodchallengePlaceDao {
     @Query("SELECT * FROM FoodchallengePlaceModel")
     suspend fun findAll(): List<FoodchallengePlaceModel>
 
-    @Query("select * from FoodchallengePlaceModel where id = :id")
-    suspend fun findById(id: Long): FoodchallengePlaceModel
+    @Query("select * from FoodchallengePlaceModel where fbId = :fbId")
+    suspend fun findById(fbId: String): FoodchallengePlaceModel
 
     @Update
     suspend fun update(foodchallengeplace: FoodchallengePlaceModel)

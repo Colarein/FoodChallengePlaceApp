@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package org.wit.foodchallengeplace.views.location
 
 
@@ -20,6 +22,7 @@ class EditLocationView : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.editLocationToolbar)
 
         presenter = EditLocationPresenter(this)
 

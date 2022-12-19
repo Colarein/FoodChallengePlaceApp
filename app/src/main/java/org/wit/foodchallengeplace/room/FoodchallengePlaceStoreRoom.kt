@@ -20,8 +20,8 @@ class FoodchallengePlaceStoreRoom( val context: Context) : FoodchallengePlaceSto
         return dao.findAll()
     }
 
-    override suspend fun findById(id: Long): FoodchallengePlaceModel? {
-        return dao.findById(id)
+    override suspend fun findById(fbId: String): FoodchallengePlaceModel? {
+        return dao.findById(fbId)
     }
 
     override suspend fun create(foodchallengeplace: FoodchallengePlaceModel) {

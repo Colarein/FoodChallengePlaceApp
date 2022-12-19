@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Foodchallenge Place</string>
+    // <string name="app_name">FC</string>
     <string name="button_addFoodchallengeplace">Add Food Challenge</string>
     <string name="hint_foodchallengeplaceTitle">Food Challenge Title</string>
     <string name="hint_restaurant">Restaurant </string>
@@ -22,7 +22,7 @@
     <string name="select_foodchallengeplace_image">Select Image</string>
     <string name="change_foodchallengeplace_image"> Change Image</string>
     <string name="button_location">Save Location</string>
-    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_map">Foodchallenge Map</string>
     <string name="title_activity_foodchallenge_place_maps">Map of All Foodchallenge Places</string>
     <string name="foodchallengeplace_image_placeholder">Foodchallenge Place Image</string>
     <string name="foodchallengeplace_title_placeholder">Foodchallenge Place Title</string>
