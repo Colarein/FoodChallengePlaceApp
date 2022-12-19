@@ -2,7 +2,6 @@ package org.wit.foodchallengeplace.models
 
 // import android.net.Uri
 import android.os.Parcelable
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
@@ -18,7 +17,9 @@ data class FoodchallengePlaceModel(@PrimaryKey(autoGenerate = true)
     var difficulty: String = "",
     // var challengePicker: Array<Int> = emptyArray(),
     var image: String = "",
-    @Embedded var location : Location = Location()): Parcelable
+    var lat: Double = 0.0,
+    var lng: Double = 0.0,
+    var zoom: Float = 0f) : Parcelable
 
 
 

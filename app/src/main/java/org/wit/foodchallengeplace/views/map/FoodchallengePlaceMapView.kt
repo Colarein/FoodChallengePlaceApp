@@ -18,7 +18,7 @@ class FoodchallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickL
     private lateinit var binding: ActivityFoodchallengeplaceMapsBinding
     private lateinit var contentBinding: ContentFoodchallengePlaceMapsBinding
     lateinit var app: MainApp
-    lateinit var presenter: PlacemarkMapPresenter
+    lateinit var presenter: FoodchallengePlaceMapPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class FoodchallengePlaceMapView : AppCompatActivity() , GoogleMap.OnMarkerClickL
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        presenter = PlacemarkMapPresenter(this)
+        presenter = FoodchallengePlaceMapPresenter(this)
 
         contentBinding = ContentFoodchallengePlaceMapsBinding.bind(binding.root)
 

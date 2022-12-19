@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package org.wit.foodchallengeplace.views.foodchallengeplace
 
 import android.annotation.SuppressLint
@@ -20,7 +22,6 @@ import org.wit.foodchallengeplace.main.MainApp
 import org.wit.foodchallengeplace.models.Location
 import org.wit.foodchallengeplace.models.FoodchallengePlaceModel
 import org.wit.foodchallengeplace.views.location.EditLocationView
-import timber.log.Timber
 import timber.log.Timber.i
 
 class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
@@ -28,13 +29,13 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
     var map: GoogleMap? = null
     var foodchallengeplace = FoodchallengePlaceModel()
     var app: MainApp = view.application as MainApp
-    var locationManuallyChanged = false;
+    var locationManuallyChanged = false
     //location service
     var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
-    var edit = false;
+    var edit = false
     private val location = Location(51.8985, -8.4756, 15f)
 
     init {
@@ -53,8 +54,8 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
             if (checkLocationPermissions(view)) {
                 doSetCurrentLocation()
             }
-            foodchallengeplace.location.lat = location.lat
-           foodchallengeplace.location.lng = location.lng
+            foodchallengeplace.lat = location.lat
+           foodchallengeplace.lng = location.lng
         }
 
     }
@@ -91,14 +92,14 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
     }
 
     fun doSetLocation() {
-        locationManuallyChanged = true;
+        locationManuallyChanged = true
 
-        if (foodchallengeplace.location.zoom != 0f) {
+        if (foodchallengeplace.zoom != 0f) {
 
-            location.lat =  foodchallengeplace.location.lat
-            location.lng = foodchallengeplace.location.lng
-            location.zoom = foodchallengeplace.location.zoom
-            locationUpdate(foodchallengeplace.location.lat, foodchallengeplace.location.lng)
+            location.lat =  foodchallengeplace.lat
+            location.lng = foodchallengeplace.lng
+            location.zoom = foodchallengeplace.zoom
+            locationUpdate(foodchallengeplace.lat, foodchallengeplace.lng)
         }
         val launcherIntent = Intent(view, EditLocationView::class.java)
             .putExtra("location", location)
@@ -115,13 +116,11 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
 
     @SuppressLint("MissingPermission")
     fun doRestartLocationUpdates() {
-        var locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) {
-                if (locationResult != null && locationResult.locations != null) {
-                    val l = locationResult.locations.last()
-                    if(!locationManuallyChanged){
-                        locationUpdate(l.latitude, l.longitude)
-                    }
+        val locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                val l = locationResult.locations.last()
+                if(!locationManuallyChanged){
+                    locationUpdate(l.latitude, l.longitude)
                 }
             }
         }
@@ -131,16 +130,18 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
     }
     fun doConfigureMap(m: GoogleMap) {
         map = m
-        locationUpdate(foodchallengeplace.location.lat, foodchallengeplace.location.lng)
+        locationUpdate(foodchallengeplace.lat, foodchallengeplace.lng)
     }
 
     fun locationUpdate(lat: Double, lng: Double) {
-        foodchallengeplace.location = location
+        foodchallengeplace.lat = lat
+        foodchallengeplace.lng = lng
+        foodchallengeplace.zoom = 15f
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
-        val options = MarkerOptions().title(foodchallengeplace.title).position(LatLng(foodchallengeplace.location.lat, foodchallengeplace.location.lng))
+        val options = MarkerOptions().title(foodchallengeplace.title).position(LatLng(foodchallengeplace.lat, foodchallengeplace.lng))
         map?.addMarker(options)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(foodchallengeplace.location.lat, foodchallengeplace.location.lng), foodchallengeplace.location.zoom))
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(foodchallengeplace.lat, foodchallengeplace.lng), foodchallengeplace.zoom))
         view.showFoodchallengeplace(foodchallengeplace)
     }
 
@@ -158,7 +159,7 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
                 when(result.resultCode){
                     AppCompatActivity.RESULT_OK -> {
                         if (result.data != null) {
-                            Timber.i("Got Result ${result.data!!.data}")
+                            i("Got Result ${result.data!!.data}")
                             foodchallengeplace.image = result.data!!.data!!.toString()
                             view.updateImage(foodchallengeplace.image)
                         }
@@ -176,10 +177,12 @@ class FoodchallengePlacePresenter(private val view: FoodchallengePlaceView) {
                 when (result.resultCode) {
                     AppCompatActivity.RESULT_OK -> {
                         if (result.data != null) {
-                            Timber.i("Got Location ${result.data.toString()}")
+                            i("Got Location ${result.data.toString()}")
                             val location = result.data!!.extras?.getParcelable<Location>("location")!!
-                            Timber.i("Location == $location")
-                            foodchallengeplace.location = location
+                            i("Location == $location")
+                            foodchallengeplace.lat = location.lat
+                            foodchallengeplace.lng = location.lng
+                            foodchallengeplace.zoom = location.zoom
                         } // end of if
                     }
                     AppCompatActivity.RESULT_CANCELED -> { } else -> { }

@@ -106,11 +106,9 @@ class FoodchallengePlaceView : AppCompatActivity() {
 
             binding.chooseImage.setText(R.string.change_foodchallengeplace_image)
         }
-        this.showLocation(foodchallengeplace.location)
-    }
-    private fun showLocation (loc: Location){
-        binding.lat.setText("%.6f".format(loc.lat))
-        binding.lng.setText("%.6f".format(loc.lng))
+        binding.lat.setText("%.6f".format(foodchallengeplace.lat))
+        binding.lng.setText("%.6f".format(foodchallengeplace.lng))
+
     }
 
     fun updateImage(image: String){

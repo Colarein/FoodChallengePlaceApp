@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.foodchallengeplace.main.MainApp
 
-class PlacemarkMapPresenter(val view: FoodchallengePlaceMapView) {
+class FoodchallengePlaceMapPresenter(val view: FoodchallengePlaceMapView) {
     var app: MainApp
 
     init {
@@ -18,10 +18,10 @@ class PlacemarkMapPresenter(val view: FoodchallengePlaceMapView) {
         map.uiSettings.setZoomControlsEnabled(true)
         map.setOnMarkerClickListener(view)
         app.foodchallengeplaces.findAll().forEach {
-            val loc = LatLng(it.location.lat, it.location.lng)
+            val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.title).position(loc)
             map.addMarker(options)?.tag = it.id
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
         }
     }
 
