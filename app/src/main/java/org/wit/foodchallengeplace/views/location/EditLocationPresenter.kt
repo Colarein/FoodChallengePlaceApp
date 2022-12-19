@@ -20,7 +20,7 @@ class EditLocationPresenter (val view: EditLocationView) {
     fun initMap(map: GoogleMap) {
         val loc = LatLng(location.lat, location.lng)
         val options = MarkerOptions()
-            .title("Placemark")
+            .title("Foodchallenge Place")
             .snippet("GPS : $loc")
             .draggable(true)
             .position(loc)
